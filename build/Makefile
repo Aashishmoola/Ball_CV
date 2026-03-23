@@ -177,6 +177,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/video_ex/video_ex.o: src/video_ex/video_ex.cpp.o
+.PHONY : src/video_ex/video_ex.o
+
+# target to build an object file
+src/video_ex/video_ex.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o
+.PHONY : src/video_ex/video_ex.cpp.o
+
+src/video_ex/video_ex.i: src/video_ex/video_ex.cpp.i
+.PHONY : src/video_ex/video_ex.i
+
+# target to preprocess a source file
+src/video_ex/video_ex.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.i
+.PHONY : src/video_ex/video_ex.cpp.i
+
+src/video_ex/video_ex.s: src/video_ex/video_ex.cpp.s
+.PHONY : src/video_ex/video_ex.s
+
+# target to generate assembly for a file
+src/video_ex/video_ex.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.s
+.PHONY : src/video_ex/video_ex.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -192,6 +216,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/video_ex/video_ex.o"
+	@echo "... src/video_ex/video_ex.i"
+	@echo "... src/video_ex/video_ex.s"
 .PHONY : help
 
 

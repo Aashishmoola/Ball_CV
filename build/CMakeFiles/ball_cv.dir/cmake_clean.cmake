@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/ball_cv.dir/src/ini_proc.cpp.o.d"
   "CMakeFiles/ball_cv.dir/src/main.cpp.o"
   "CMakeFiles/ball_cv.dir/src/main.cpp.o.d"
+  "CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o"
+  "CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o.d"
   "ball_cv"
   "ball_cv.pdb"
 )

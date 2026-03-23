@@ -57,6 +57,7 @@ message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
 set(SOURCES
     src/main.cpp
     src/ini_proc.cpp
+    src/video_ex/video_ex.cpp
 )
 
 # ============================================================================

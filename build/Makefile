@@ -129,6 +129,30 @@ ball_cv/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/build
 .PHONY : ball_cv/fast
 
+src/back_sub/back_sub.o: src/back_sub/back_sub.cpp.o
+.PHONY : src/back_sub/back_sub.o
+
+# target to build an object file
+src/back_sub/back_sub.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.o
+.PHONY : src/back_sub/back_sub.cpp.o
+
+src/back_sub/back_sub.i: src/back_sub/back_sub.cpp.i
+.PHONY : src/back_sub/back_sub.i
+
+# target to preprocess a source file
+src/back_sub/back_sub.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.i
+.PHONY : src/back_sub/back_sub.cpp.i
+
+src/back_sub/back_sub.s: src/back_sub/back_sub.cpp.s
+.PHONY : src/back_sub/back_sub.s
+
+# target to generate assembly for a file
+src/back_sub/back_sub.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.s
+.PHONY : src/back_sub/back_sub.cpp.s
+
 src/ini_proc.o: src/ini_proc.cpp.o
 .PHONY : src/ini_proc.o
 
@@ -210,6 +234,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... ball_cv"
+	@echo "... src/back_sub/back_sub.o"
+	@echo "... src/back_sub/back_sub.i"
+	@echo "... src/back_sub/back_sub.s"
 	@echo "... src/ini_proc.o"
 	@echo "... src/ini_proc.i"
 	@echo "... src/ini_proc.s"

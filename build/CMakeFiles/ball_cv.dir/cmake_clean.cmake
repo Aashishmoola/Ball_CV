@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.o"
+  "CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.o.d"
   "CMakeFiles/ball_cv.dir/src/ini_proc.cpp.o"
   "CMakeFiles/ball_cv.dir/src/ini_proc.cpp.o.d"
   "CMakeFiles/ball_cv.dir/src/main.cpp.o"

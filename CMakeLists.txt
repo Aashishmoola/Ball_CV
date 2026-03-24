@@ -58,6 +58,7 @@ set(SOURCES
     src/main.cpp
     src/ini_proc.cpp
     src/video_ex/video_ex.cpp
+    src/back_sub/back_sub.cpp
 )
 
 # ============================================================================

@@ -9,6 +9,9 @@
 cv::Mat Img_P::convert_grayscale(cv::Mat& img){
     cv::Mat grayed_img;
     cv::cvtColor(img, grayed_img, cv::COLOR_BGR2GRAY);
+
+    // Printing out type convertion
+    std::cout << "Type: " << cv::typeToString(img.type()) << " --> " << cv::typeToString(grayed_img.type()) << '\n';
     return grayed_img;
 };
 

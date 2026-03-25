@@ -8,6 +8,9 @@
     - Trigger Detatching: Inverse Trigger Attatching
     - Data validation (course): N pos, N timestamp --> N-- pos, N-- timestamp (if pos > acceptable spread remove data)
     - Data validation & Processing (fine): N pos, N timestamp --> Pedictive algo (feedback error correction/mitigation) --> dist-time Eqn (graph, gradient --> velocity)
-    - Metrics Calculation: dist-time Eqn, camera_pos --> Getting x - intercepts --> Max dist, Max height  
+    - Metrics Calculation: dist-time Eqn, camera_pos --> Getting x - intercepts --> Max dist, Max height
+
+  
+Should use a middleware architecture so validation of cv::Mat types as they differ are done in layers and can be abstracted away/reused easily --> with muliple benifts
 
 

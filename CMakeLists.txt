@@ -56,9 +56,10 @@ message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
 # Using a variable keeps the executable definition clean and easy to maintain.
 set(SOURCES
     src/main.cpp
-    src/ini_proc.cpp
+    src/ball_det/back_sub/back_sub.cpp
+    src/ball_det/preproc/preproc.cpp
+    src/ball_det/h_transform/h_transform.cpp
     src/video_ex/video_ex.cpp
-    src/back_sub/back_sub.cpp
 )
 
 # ============================================================================

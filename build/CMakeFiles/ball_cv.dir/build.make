@@ -83,24 +83,52 @@ CMakeFiles/ball_cv.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ball_cv.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/aashishrapsodo/rapsodo/repos/ball_cv/src/main.cpp -o CMakeFiles/ball_cv.dir/src/main.cpp.s
 
-CMakeFiles/ball_cv.dir/src/ini_proc.cpp.o: CMakeFiles/ball_cv.dir/flags.make
-CMakeFiles/ball_cv.dir/src/ini_proc.cpp.o: /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ini_proc.cpp
-CMakeFiles/ball_cv.dir/src/ini_proc.cpp.o: CMakeFiles/ball_cv.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/aashishrapsodo/rapsodo/repos/ball_cv/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ball_cv.dir/src/ini_proc.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ball_cv.dir/src/ini_proc.cpp.o -MF CMakeFiles/ball_cv.dir/src/ini_proc.cpp.o.d -o CMakeFiles/ball_cv.dir/src/ini_proc.cpp.o -c /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ini_proc.cpp
+CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.o: CMakeFiles/ball_cv.dir/flags.make
+CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.o: /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/back_sub/back_sub.cpp
+CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.o: CMakeFiles/ball_cv.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/aashishrapsodo/rapsodo/repos/ball_cv/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.o -MF CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.o.d -o CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.o -c /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/back_sub/back_sub.cpp
 
-CMakeFiles/ball_cv.dir/src/ini_proc.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ball_cv.dir/src/ini_proc.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ini_proc.cpp > CMakeFiles/ball_cv.dir/src/ini_proc.cpp.i
+CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/back_sub/back_sub.cpp > CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.i
 
-CMakeFiles/ball_cv.dir/src/ini_proc.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ball_cv.dir/src/ini_proc.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ini_proc.cpp -o CMakeFiles/ball_cv.dir/src/ini_proc.cpp.s
+CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/back_sub/back_sub.cpp -o CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.s
+
+CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.o: CMakeFiles/ball_cv.dir/flags.make
+CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.o: /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/preproc/preproc.cpp
+CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.o: CMakeFiles/ball_cv.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/aashishrapsodo/rapsodo/repos/ball_cv/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.o -MF CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.o.d -o CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.o -c /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/preproc/preproc.cpp
+
+CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/preproc/preproc.cpp > CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.i
+
+CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/preproc/preproc.cpp -o CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.s
+
+CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.o: CMakeFiles/ball_cv.dir/flags.make
+CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.o: /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/h_transform/h_transform.cpp
+CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.o: CMakeFiles/ball_cv.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/aashishrapsodo/rapsodo/repos/ball_cv/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.o -MF CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.o.d -o CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.o -c /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/h_transform/h_transform.cpp
+
+CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/h_transform/h_transform.cpp > CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.i
+
+CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/h_transform/h_transform.cpp -o CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.s
 
 CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: CMakeFiles/ball_cv.dir/flags.make
 CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo/repos/ball_cv/src/video_ex/video_ex.cpp
 CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: CMakeFiles/ball_cv.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/aashishrapsodo/rapsodo/repos/ball_cv/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/aashishrapsodo/rapsodo/repos/ball_cv/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o -MF CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o.d -o CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o -c /home/aashishrapsodo/rapsodo/repos/ball_cv/src/video_ex/video_ex.cpp
 
 CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.i: cmake_force
@@ -111,34 +139,22 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/aashishrapsodo/rapsodo/repos/ball_cv/src/video_ex/video_ex.cpp -o CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.s
 
-CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.o: CMakeFiles/ball_cv.dir/flags.make
-CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.o: /home/aashishrapsodo/rapsodo/repos/ball_cv/src/back_sub/back_sub.cpp
-CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.o: CMakeFiles/ball_cv.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/aashishrapsodo/rapsodo/repos/ball_cv/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.o -MF CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.o.d -o CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.o -c /home/aashishrapsodo/rapsodo/repos/ball_cv/src/back_sub/back_sub.cpp
-
-CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/aashishrapsodo/rapsodo/repos/ball_cv/src/back_sub/back_sub.cpp > CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.i
-
-CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/aashishrapsodo/rapsodo/repos/ball_cv/src/back_sub/back_sub.cpp -o CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.s
-
 # Object files for target ball_cv
 ball_cv_OBJECTS = \
 "CMakeFiles/ball_cv.dir/src/main.cpp.o" \
-"CMakeFiles/ball_cv.dir/src/ini_proc.cpp.o" \
-"CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o" \
-"CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.o"
+"CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.o" \
+"CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.o" \
+"CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.o" \
+"CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o"
 
 # External object files for target ball_cv
 ball_cv_EXTERNAL_OBJECTS =
 
 ball_cv: CMakeFiles/ball_cv.dir/src/main.cpp.o
-ball_cv: CMakeFiles/ball_cv.dir/src/ini_proc.cpp.o
+ball_cv: CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.o
+ball_cv: CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.o
+ball_cv: CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.o
 ball_cv: CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o
-ball_cv: CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.o
 ball_cv: CMakeFiles/ball_cv.dir/build.make
 ball_cv: /home/aashishrapsodo/Libraries/opencv/build/lib/libopencv_gapi.so.4.14.0
 ball_cv: /home/aashishrapsodo/Libraries/opencv/build/lib/libopencv_highgui.so.4.14.0
@@ -156,7 +172,7 @@ ball_cv: /home/aashishrapsodo/Libraries/opencv/build/lib/libopencv_flann.so.4.14
 ball_cv: /home/aashishrapsodo/Libraries/opencv/build/lib/libopencv_imgproc.so.4.14.0
 ball_cv: /home/aashishrapsodo/Libraries/opencv/build/lib/libopencv_core.so.4.14.0
 ball_cv: CMakeFiles/ball_cv.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/aashishrapsodo/rapsodo/repos/ball_cv/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable ball_cv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/aashishrapsodo/rapsodo/repos/ball_cv/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable ball_cv"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ball_cv.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

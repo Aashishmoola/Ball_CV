@@ -129,53 +129,77 @@ ball_cv/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/build
 .PHONY : ball_cv/fast
 
-src/back_sub/back_sub.o: src/back_sub/back_sub.cpp.o
-.PHONY : src/back_sub/back_sub.o
+src/ball_det/back_sub/back_sub.o: src/ball_det/back_sub/back_sub.cpp.o
+.PHONY : src/ball_det/back_sub/back_sub.o
 
 # target to build an object file
-src/back_sub/back_sub.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.o
-.PHONY : src/back_sub/back_sub.cpp.o
+src/ball_det/back_sub/back_sub.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.o
+.PHONY : src/ball_det/back_sub/back_sub.cpp.o
 
-src/back_sub/back_sub.i: src/back_sub/back_sub.cpp.i
-.PHONY : src/back_sub/back_sub.i
+src/ball_det/back_sub/back_sub.i: src/ball_det/back_sub/back_sub.cpp.i
+.PHONY : src/ball_det/back_sub/back_sub.i
 
 # target to preprocess a source file
-src/back_sub/back_sub.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.i
-.PHONY : src/back_sub/back_sub.cpp.i
+src/ball_det/back_sub/back_sub.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.i
+.PHONY : src/ball_det/back_sub/back_sub.cpp.i
 
-src/back_sub/back_sub.s: src/back_sub/back_sub.cpp.s
-.PHONY : src/back_sub/back_sub.s
+src/ball_det/back_sub/back_sub.s: src/ball_det/back_sub/back_sub.cpp.s
+.PHONY : src/ball_det/back_sub/back_sub.s
 
 # target to generate assembly for a file
-src/back_sub/back_sub.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/back_sub/back_sub.cpp.s
-.PHONY : src/back_sub/back_sub.cpp.s
+src/ball_det/back_sub/back_sub.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.s
+.PHONY : src/ball_det/back_sub/back_sub.cpp.s
 
-src/ini_proc.o: src/ini_proc.cpp.o
-.PHONY : src/ini_proc.o
+src/ball_det/h_transform/h_transform.o: src/ball_det/h_transform/h_transform.cpp.o
+.PHONY : src/ball_det/h_transform/h_transform.o
 
 # target to build an object file
-src/ini_proc.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/ini_proc.cpp.o
-.PHONY : src/ini_proc.cpp.o
+src/ball_det/h_transform/h_transform.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.o
+.PHONY : src/ball_det/h_transform/h_transform.cpp.o
 
-src/ini_proc.i: src/ini_proc.cpp.i
-.PHONY : src/ini_proc.i
+src/ball_det/h_transform/h_transform.i: src/ball_det/h_transform/h_transform.cpp.i
+.PHONY : src/ball_det/h_transform/h_transform.i
 
 # target to preprocess a source file
-src/ini_proc.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/ini_proc.cpp.i
-.PHONY : src/ini_proc.cpp.i
+src/ball_det/h_transform/h_transform.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.i
+.PHONY : src/ball_det/h_transform/h_transform.cpp.i
 
-src/ini_proc.s: src/ini_proc.cpp.s
-.PHONY : src/ini_proc.s
+src/ball_det/h_transform/h_transform.s: src/ball_det/h_transform/h_transform.cpp.s
+.PHONY : src/ball_det/h_transform/h_transform.s
 
 # target to generate assembly for a file
-src/ini_proc.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/ini_proc.cpp.s
-.PHONY : src/ini_proc.cpp.s
+src/ball_det/h_transform/h_transform.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.s
+.PHONY : src/ball_det/h_transform/h_transform.cpp.s
+
+src/ball_det/preproc/preproc.o: src/ball_det/preproc/preproc.cpp.o
+.PHONY : src/ball_det/preproc/preproc.o
+
+# target to build an object file
+src/ball_det/preproc/preproc.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.o
+.PHONY : src/ball_det/preproc/preproc.cpp.o
+
+src/ball_det/preproc/preproc.i: src/ball_det/preproc/preproc.cpp.i
+.PHONY : src/ball_det/preproc/preproc.i
+
+# target to preprocess a source file
+src/ball_det/preproc/preproc.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.i
+.PHONY : src/ball_det/preproc/preproc.cpp.i
+
+src/ball_det/preproc/preproc.s: src/ball_det/preproc/preproc.cpp.s
+.PHONY : src/ball_det/preproc/preproc.s
+
+# target to generate assembly for a file
+src/ball_det/preproc/preproc.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.s
+.PHONY : src/ball_det/preproc/preproc.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -234,12 +258,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... ball_cv"
-	@echo "... src/back_sub/back_sub.o"
-	@echo "... src/back_sub/back_sub.i"
-	@echo "... src/back_sub/back_sub.s"
-	@echo "... src/ini_proc.o"
-	@echo "... src/ini_proc.i"
-	@echo "... src/ini_proc.s"
+	@echo "... src/ball_det/back_sub/back_sub.o"
+	@echo "... src/ball_det/back_sub/back_sub.i"
+	@echo "... src/ball_det/back_sub/back_sub.s"
+	@echo "... src/ball_det/h_transform/h_transform.o"
+	@echo "... src/ball_det/h_transform/h_transform.i"
+	@echo "... src/ball_det/h_transform/h_transform.s"
+	@echo "... src/ball_det/preproc/preproc.o"
+	@echo "... src/ball_det/preproc/preproc.i"
+	@echo "... src/ball_det/preproc/preproc.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

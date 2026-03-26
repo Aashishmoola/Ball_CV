@@ -3,11 +3,57 @@
 #include <opencv2/imgproc.hpp>
 
 
+// TODO: Replace Bg_pt with cv::Point 
+// TODO: Seperate validation into a different layer.
+
 const uchar test_threshold{140};
 const int k_size{3};
 
+
+uchar threshold_calc(const cv::Mat img){
+    // Returns two estimated threshold value that is 2 stddev from mean 
+    // By nature of comp of del B, foreground will be lighter pixels
+    cv::Scalar mean, stddev;
+    cv::meanStdDev(img, mean, stddev);
+    return static_cast<uchar>(cvRound(mean[0] + 2.0 * stddev[0]));
+}
+
+
+cv::Mat Bg_sub::create_histogram(const cv::Mat& img, bool should_print){
+    cv::Mat hist_img;
+    std::vector<int> channels{0}; // Channel index not number
+    std::vector<int>hist_size{256};
+    std::vector<float>hist_range{0.0, 256.0};
+
+    cv::calcHist(std::vector<cv::Mat>{img}, channels, cv::Mat(), hist_img, hist_size, hist_range);
+    
+    if (should_print) {
+
+        cv::Mat hist_img_norm;
+        cv::normalize(hist_img, hist_img_norm, 0, 1.0, cv::NORM_MINMAX);
+        
+        cv::Scalar white_color{255};
+        int cols = hist_size[0];
+
+        int disp_rows_scale = 400;
+        int v_offset = 100;
+        int rows = disp_rows_scale + v_offset;
+        
+        cv::Mat hist_img_disp = cv::Mat::zeros(cv::Size{cols, rows}, CV_8UC1);
+        
+        for (int i=0;i<cols;i++){
+            int freq_count{static_cast<int>(hist_img_norm.at<float>(i) * disp_rows_scale)};
+            cv::line(hist_img_disp, cv::Point{i, 0}, cv::Point{i, freq_count}, white_color, 1);
+        }
+
+
+        return hist_img_disp;
+    }
+    return hist_img;
+}
+
 // Can use cv::absdiff instead in needed.
-cv::Mat comp_and_threshold(const cv::Mat& img_1, const cv::Mat& img_2, const uchar threshold){
+cv::Mat Bg_sub::comp_and_threshold(const cv::Mat& img_1, const cv::Mat& img_2, const uchar threshold, bool should_threshold){
     
     
     // Initializing with the first image
@@ -25,13 +71,14 @@ cv::Mat comp_and_threshold(const cv::Mat& img_1, const cv::Mat& img_2, const uch
             // nwing conv is fine here as it is not nrwing
             
             uchar del_b_char = static_cast<uchar>(std::abs(del_b));
-            out_img.at<uchar>(i, j) = (del_b_char > threshold) ? 255 : 0;
+
+            if (should_threshold) out_img.at<uchar>(i, j) = (del_b_char > threshold) ? 255 : 0;
+            else out_img.at<uchar>(i, j) = del_b_char;
         }
     }
 
     return out_img;
 }
-
 // x and y are already relative indexes to the padded image, starting without the padding itself.  
 bool morph_min_max(const Bg_sub::pt_t& pt, const cv::Mat& k, const cv::Mat& padded_img, const uchar comp_val){
     int k_size{k.rows};
@@ -47,7 +94,7 @@ bool morph_min_max(const Bg_sub::pt_t& pt, const cv::Mat& k, const cv::Mat& padd
     return false;
 }
 
-cv::Mat morph_process(cv::Mat& img, Bg_sub::BIN_P proc_type, const int k_size=3) {
+cv::Mat morph_process(const cv::Mat& img, Bg_sub::BIN_P proc_type, const int k_size=3) {
     // Image type validation should already be done.
     if (!(k_size == 3 || k_size == 5 || k_size == 7)) {
         throw std::invalid_argument("The kernal size should of size 3, 5 or 7.");
@@ -77,12 +124,26 @@ cv::Mat morph_process(cv::Mat& img, Bg_sub::BIN_P proc_type, const int k_size=3)
     return out_img;
 }
 
+cv::Mat morph_opening(const cv::Mat& img){
+    cv::Mat erosed_img = morph_process(img, Bg_sub::BIN_P::EROSION, k_size);
+    cv::Mat dialated_img = morph_process(erosed_img, Bg_sub::BIN_P::DIALATION, k_size);
+
+    return dialated_img;
+}
+
+cv::Mat morph_closing(const cv::Mat& img){
+    cv::Mat dialated_img = morph_process(img, Bg_sub::BIN_P::DIALATION, k_size);
+    cv::Mat erosed_img = morph_process(dialated_img, Bg_sub::BIN_P::EROSION, k_size);
+
+    return erosed_img;
+}
+
 cv::Mat Bg_sub::sub_algo(const cv::Mat& img_1, const cv::Mat& img_2){
     // 1. Calculate del B --> Map of del in pixel brighness due to motion
     // 2. Threshold --> filtering of large and small del B into binary values --> makes 1 more obvious 
     // 3. Removing noise and holes
-        // Opening --> Erosing >> Dialation
-        // Closing --> Dialation >> Erosion
+        // Opening(places small foreground artifacst into the background) --> Erosing >> Dialation 
+        // Closing(covers up small holes in the foregroung) --> Dialation >> Erosion
 
     // Type --> No. of channels (in each pixel) (1 --> greyscale, 3 --> BGR) 
     // + Data type of each channel value (CV_8U --> Unsigned int, 8 bits long)
@@ -90,9 +151,9 @@ cv::Mat Bg_sub::sub_algo(const cv::Mat& img_1, const cv::Mat& img_2){
         throw std::invalid_argument("Both inputted images are not of the same type");
     }
 
-    cv::Mat proc_img= comp_and_threshold(img_1, img_2, test_threshold);
-    morph_process(morph_process(proc_img, Bg_sub::BIN_P::DIALATION, 3), Bg_sub::BIN_P::EROSION, 3))
-
+    // Opening
+    cv::Mat thresh_img= comp_and_threshold(img_1, img_2, test_threshold);
+    return morph_opening(thresh_img);
 }
 
 

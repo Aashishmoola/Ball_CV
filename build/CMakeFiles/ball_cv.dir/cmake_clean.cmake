@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/ball_cv.dir/src/data_val_f/data_val_f.cpp.o.d"
   "CMakeFiles/ball_cv.dir/src/main.cpp.o"
   "CMakeFiles/ball_cv.dir/src/main.cpp.o.d"
+  "CMakeFiles/ball_cv.dir/src/met_calc/met_calc.cpp.o"
+  "CMakeFiles/ball_cv.dir/src/met_calc/met_calc.cpp.o.d"
   "CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o"
   "CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o.d"
   "ball_cv"

@@ -20,6 +20,7 @@
 3. Use consistenly named namespaces for each module
 4. Global helpers module should contain functions that are really global --> Does opencv or other third party libs not have this helper function that you have to implement yourself?
 5. In terms of naming conventions --> The larger the scope, the more distinct and readable the names for objects, rvalues has to be.
+6. Import std libs or third party libs in the .cpp file (the implementation file) or the header file only when used in the file itself.
 
 ## How to write comments
 

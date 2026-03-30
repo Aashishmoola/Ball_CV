@@ -249,6 +249,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/met_calc/met_calc.o: src/met_calc/met_calc.cpp.o
+.PHONY : src/met_calc/met_calc.o
+
+# target to build an object file
+src/met_calc/met_calc.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/met_calc/met_calc.cpp.o
+.PHONY : src/met_calc/met_calc.cpp.o
+
+src/met_calc/met_calc.i: src/met_calc/met_calc.cpp.i
+.PHONY : src/met_calc/met_calc.i
+
+# target to preprocess a source file
+src/met_calc/met_calc.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/met_calc/met_calc.cpp.i
+.PHONY : src/met_calc/met_calc.cpp.i
+
+src/met_calc/met_calc.s: src/met_calc/met_calc.cpp.s
+.PHONY : src/met_calc/met_calc.s
+
+# target to generate assembly for a file
+src/met_calc/met_calc.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/met_calc/met_calc.cpp.s
+.PHONY : src/met_calc/met_calc.cpp.s
+
 src/video_ex/video_ex.o: src/video_ex/video_ex.cpp.o
 .PHONY : src/video_ex/video_ex.o
 
@@ -297,6 +321,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/met_calc/met_calc.o"
+	@echo "... src/met_calc/met_calc.i"
+	@echo "... src/met_calc/met_calc.s"
 	@echo "... src/video_ex/video_ex.o"
 	@echo "... src/video_ex/video_ex.i"
 	@echo "... src/video_ex/video_ex.s"

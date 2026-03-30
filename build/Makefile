@@ -201,6 +201,30 @@ src/ball_det/preproc/preproc.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.s
 .PHONY : src/ball_det/preproc/preproc.cpp.s
 
+src/data_val_f/data_val_f.o: src/data_val_f/data_val_f.cpp.o
+.PHONY : src/data_val_f/data_val_f.o
+
+# target to build an object file
+src/data_val_f/data_val_f.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/data_val_f/data_val_f.cpp.o
+.PHONY : src/data_val_f/data_val_f.cpp.o
+
+src/data_val_f/data_val_f.i: src/data_val_f/data_val_f.cpp.i
+.PHONY : src/data_val_f/data_val_f.i
+
+# target to preprocess a source file
+src/data_val_f/data_val_f.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/data_val_f/data_val_f.cpp.i
+.PHONY : src/data_val_f/data_val_f.cpp.i
+
+src/data_val_f/data_val_f.s: src/data_val_f/data_val_f.cpp.s
+.PHONY : src/data_val_f/data_val_f.s
+
+# target to generate assembly for a file
+src/data_val_f/data_val_f.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/data_val_f/data_val_f.cpp.s
+.PHONY : src/data_val_f/data_val_f.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -267,6 +291,9 @@ help:
 	@echo "... src/ball_det/preproc/preproc.o"
 	@echo "... src/ball_det/preproc/preproc.i"
 	@echo "... src/ball_det/preproc/preproc.s"
+	@echo "... src/data_val_f/data_val_f.o"
+	@echo "... src/data_val_f/data_val_f.i"
+	@echo "... src/data_val_f/data_val_f.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

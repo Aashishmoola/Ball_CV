@@ -60,6 +60,7 @@ set(SOURCES
     src/ball_det/preproc/preproc.cpp
     src/ball_det/h_transform/h_transform.cpp
     src/video_ex/video_ex.cpp
+    src/data_val_f/data_val_f.cpp
 )
 
 # ============================================================================

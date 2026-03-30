@@ -22,8 +22,9 @@
 
 ## Status of each module: 
 
-1. --> Have to test
+1. --> Have to test, dynamic threshold value calculation needs to be implemented and tested, histogram plot should be changed to matplot++
 3. --> Have to test
+6. --> Currently active
 
 
 ## General TODO

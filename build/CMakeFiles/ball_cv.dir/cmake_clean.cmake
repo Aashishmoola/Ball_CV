@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/ball_cv.dir/src/ball_det/h_transform/h_transform.cpp.o.d"
   "CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.o"
   "CMakeFiles/ball_cv.dir/src/ball_det/preproc/preproc.cpp.o.d"
+  "CMakeFiles/ball_cv.dir/src/data_val_f/data_val_f.cpp.o"
+  "CMakeFiles/ball_cv.dir/src/data_val_f/data_val_f.cpp.o.d"
   "CMakeFiles/ball_cv.dir/src/main.cpp.o"
   "CMakeFiles/ball_cv.dir/src/main.cpp.o.d"
   "CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o"

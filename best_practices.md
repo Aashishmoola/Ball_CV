@@ -21,6 +21,7 @@
 4. Global helpers module should contain functions that are really global --> Does opencv or other third party libs not have this helper function that you have to implement yourself?
 5. In terms of naming conventions --> The larger the scope, the more distinct and readable the names for objects, rvalues has to be.
 6. Import std libs or third party libs in the .cpp file (the implementation file) or the header file only when used in the file itself.
+7. Do not outsource parsing of code (understanding syntax), understanding (mental compilation) and writing code (making design decisions) to claude. You are outsourcing the skill people are going to hire you for.
 
 ## How to write comments
 
@@ -32,6 +33,6 @@
     - Header (stack): rows, cols, type, step, and a uchar* data     pointer                                      
     - Data (heap): the actual pixel buffer, with a int* refcount alongside it 
 
-1. Take in cv::Mat by ref --> To prevent unnecessary copy of headfer during param initialation
+1. Take in cv::Mat by ref --> To prevent unnecessary copy of header during param initialization
     Use const if you are not modifying the image directly, but instead creating a copy
 2. Return cv::Mat directly --> Return value optimsed, anyways shallow header copy, dont use out_params unless another value has to be returned also.

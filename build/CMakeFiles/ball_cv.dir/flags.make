@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -isystem /home/aashishrapsodo/Libraries/opencv/build -isystem /home/aashishrapsodo/Libraries/opencv/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/core/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/flann/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/imgproc/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/ml/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/photo/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/dnn/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/features2d/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/imgcodecs/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/videoio/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/calib3d/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/highgui/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/objdetect/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/stitching/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/ts/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/video/include -isystem /home/aashishrapsodo/Libraries/opencv/modules/gapi/include
 
-CXX_FLAGS = -O3 -DNDEBUG -std=c++17
+CXX_FLAGS = -g -std=c++17
 

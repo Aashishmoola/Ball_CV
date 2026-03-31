@@ -19,7 +19,7 @@ uchar threshold_calc(const cv::Mat img){
 }
 
 
-cv::Mat Bg_sub::create_histogram(const cv::Mat& img, bool should_print){
+cv::Mat Bg_sub::create_histogram(const cv::Mat& img, int thresh_index, bool should_print){
     cv::Mat hist_img;
     std::vector<int> channels{0}; // Channel index not number
     std::vector<int>hist_size{256};
@@ -28,22 +28,41 @@ cv::Mat Bg_sub::create_histogram(const cv::Mat& img, bool should_print){
     cv::calcHist(std::vector<cv::Mat>{img}, channels, cv::Mat(), hist_img, hist_size, hist_range);
     
     if (should_print) {
+        // Hist will start printing from the top left of the image
+        constexpr int line_width{5};
+        constexpr int mask_index{20}; // Masks the first x values of the histogram {most freq background pixels} before normalization
+        
+        cv::Scalar white_color{255};
+        cv::Scalar gray_color{128};
+        
+        int hist_img_cols{hist_size[0]};
+        int img_disp_cols{hist_img_cols * line_width};
+        
+        int img_disp_rows_scale = 400;
+        
+        int v_offset = 100;
+        int img_disp_rows = img_disp_rows_scale + v_offset;
+        
+        // Mask the histogram
+        for(int i=0;i<mask_index;i++){
+            hist_img.at<float>(i) = 0;
+        }
 
         cv::Mat hist_img_norm;
         cv::normalize(hist_img, hist_img_norm, 0, 1.0, cv::NORM_MINMAX);
         
-        cv::Scalar white_color{255};
-        int cols = hist_size[0];
-
-        int disp_rows_scale = 400;
-        int v_offset = 100;
-        int rows = disp_rows_scale + v_offset;
         
-        cv::Mat hist_img_disp = cv::Mat::zeros(cv::Size{cols, rows}, CV_8UC1);
+        cv::Mat hist_img_disp = cv::Mat::zeros(cv::Size{img_disp_cols, img_disp_rows}, CV_8UC1);
         
-        for (int i=0;i<cols;i++){
-            int freq_count{static_cast<int>(hist_img_norm.at<float>(i) * disp_rows_scale)};
-            cv::line(hist_img_disp, cv::Point{i, 0}, cv::Point{i, freq_count}, white_color, 1);
+        for (int i=0;i<hist_img_cols;i++){
+            int freq_count{static_cast<int>(hist_img_norm.at<float>(i) * img_disp_rows_scale)};
+            for (int j=i*line_width;j<i*line_width+line_width;j++){
+                if (i==thresh_index){
+                    cv::line(hist_img_disp, cv::Point{j, 0}, cv::Point{j, freq_count}, white_color, 1);
+                } else {
+                    cv::line(hist_img_disp, cv::Point{j, 0}, cv::Point{j, freq_count}, gray_color, 1);
+                }
+            }
         }
 
 

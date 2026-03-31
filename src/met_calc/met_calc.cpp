@@ -27,9 +27,9 @@ constexpr double Y_OFFSET = 1;
                      x -> distance of centre of ball from centre of frame
 */
 
-void convert_ball_states_metric(Ball_states& b_states){}
+void convert_ball_states_metric(Ball_states& b_states){
 
-
+}
 
 /*  Calc drag coefficent with least sqaures.  k = Σ(-a_i * v_i²) / Σ(v_i⁴)
     Check negative sign, v > 0 while a < 0 and k > 0

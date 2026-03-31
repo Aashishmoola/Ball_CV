@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 
 namespace Bg_sub{
@@ -15,5 +14,5 @@ namespace Bg_sub{
     };
     cv::Mat sub_algo(const cv::Mat& img_in_1, const cv::Mat& img_in_2);
     cv::Mat comp_and_threshold(const cv::Mat& img_1, const cv::Mat& img_2, const uchar threshold, bool should_threshold=true);
-    cv::Mat create_histogram(const cv::Mat& img, bool should_print=false);
+    cv::Mat create_histogram(const cv::Mat& img, int thresh_index, bool should_print=false);
 }

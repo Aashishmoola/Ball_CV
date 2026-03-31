@@ -25,17 +25,22 @@ void test_video_ex(){
 }
 
 void test_back_sub(){
+    constexpr int thresh_val{35};
     cv::Mat img_1 = cv::imread("../images/back_sub/test_1.png");
     cv::Mat img_2 = cv::imread("../images/back_sub/test_2.png");
 
     cv::Mat grayed_img_1 = Img_P::convert_grayscale(img_1);
     cv::Mat grayed_img_2 = Img_P::convert_grayscale(img_2);
 
-    cv::Mat del_B_img = Bg_sub::comp_and_threshold(grayed_img_1, grayed_img_2, 140, false);
-    cv::Mat hist_del_B_img = Bg_sub::create_histogram(del_B_img, true);
+    cv::Mat del_B_img = Bg_sub::comp_and_threshold(grayed_img_1, grayed_img_2, 0, false);
+    cv::Mat del_B_img_thresh = Bg_sub::comp_and_threshold(grayed_img_1, grayed_img_2, thresh_val, true);
 
-    cv::imshow("del_b_img", del_B_img);
+    cv::Mat hist_del_B_img = Bg_sub::create_histogram(del_B_img, thresh_val, true);
+
+    cv::imshow("del_b_img Not Thresholded", del_B_img);
+    cv::imshow("del_b_img Thresholded", del_B_img_thresh);
     cv::imshow("hist_del_B_img", hist_del_B_img);
+
 
 
     // cv::Mat processed_img = Bg_sub::sub_algo(grayed_img_1, grayed_img_2);

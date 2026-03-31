@@ -26,7 +26,9 @@
 
 1. --> Have to improve
 TODO: Dynamic threshold value calculation needs to be implemented and tested
-TODO: Histogram plot should be changed to matplot++
+TODO: Shape of histogram for calculating the threshold val is flat after the values with minimal change have been removed.
+        - Change function to only show values that have increased in brightness. --> remove dbl artifact
+        - Dynamically calculate threshold appr
 3. --> Not necessary for actual implementation. Will only be used if data has to be steamed as a video instead of a jpeg.
 7. --> Have to test and implement.
 TODO: Return velocity estimations (full state)

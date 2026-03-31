@@ -9,6 +9,12 @@ struct ball_state_t
     double y;
     double x_v;
     double y_v;
+    bool is_metric{false};
+};
+
+struct ball_disp_t{
+    double x;
+    double y;
 };
 
 using Ball_states = std::vector<ball_state_t>;

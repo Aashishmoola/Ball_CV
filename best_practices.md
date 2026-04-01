@@ -15,15 +15,19 @@
 
 
 ## Best practices
-1. Keep hardcoded values for testing in the cpp file while the prod values should go in the hpp file. 
+1. The hpp file must only contain declerations. The cpp file should contain implementation specific global consts. 
+    - Use constexpr if possible. 
+    - Seperate dev and prod constants with comments.
 2. Use scoped enums for switches instead of bool vals (no semantic meaning);
 3. Use consistenly named namespaces for each module
 4. Global helpers module should contain functions that are really global --> Does opencv or other third party libs not have this helper function that you have to implement yourself?
 5. In terms of naming conventions --> The larger the scope, the more distinct and readable the names for objects, rvalues has to be.
 6. Import std libs or third party libs in the .cpp file (the implementation file) or the header file only when used in the file itself.
 7. Do not outsource parsing of code (understanding syntax), understanding (mental compilation) and writing code (making design decisions) to claude. You are outsourcing the skill people are going to hire you for.
+8. Always do validation with false break/return cases instead of nested true cases. --> General Coding Antipattern
 
-## How to write comments
+## Common errors
+1. All relative paths used are realtive to the root of the build dir as there is where the bin file is built.
 
 
 ## Specific guidelines for this project

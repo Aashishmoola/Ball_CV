@@ -62,6 +62,7 @@ set(SOURCES
     src/video_ex/video_ex.cpp
     src/data_val_f/data_val_f.cpp
     src/met_calc/met_calc.cpp
+    src/val/val.cpp
 )
 
 # ============================================================================

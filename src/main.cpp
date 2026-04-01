@@ -2,13 +2,14 @@
 #include "video_ex/video_ex.hpp"
 #include "ball_det/back_sub/back_sub.hpp"
 #include "ball_det/h_transform/h_transform.hpp"
+#include "val/val.hpp"
 
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
 
+#include <filesystem>
 #include <iostream>
-
-
+namespace fs = std::filesystem;
 
 cv::Mat test_img_preproc(const std::string& full_src_name){
     // Read file:
@@ -26,11 +27,15 @@ void test_video_ex(){
 
 void test_back_sub(){
     constexpr int thresh_val{35};
-    cv::Mat img_1 = cv::imread("../images/back_sub/test_1.png");
-    cv::Mat img_2 = cv::imread("../images/back_sub/test_2.png");
+    const std::string path_lib{"../images/back_sub"}; 
 
-    cv::Mat grayed_img_1 = Img_P::convert_grayscale(img_1);
-    cv::Mat grayed_img_2 = Img_P::convert_grayscale(img_2);
+    Val::images_t images;
+    images.path = path_lib;
+
+    Val::read_img_files(images);
+
+    cv::Mat grayed_img_1 = Img_P::convert_grayscale(images.imgs_mat.at(0));
+    cv::Mat grayed_img_2 = Img_P::convert_grayscale(images.imgs_mat.at(1));
 
     cv::Mat del_B_img = Bg_sub::comp_and_threshold(grayed_img_1, grayed_img_2, 0, false);
     cv::Mat del_B_img_thresh = Bg_sub::comp_and_threshold(grayed_img_1, grayed_img_2, thresh_val, true);

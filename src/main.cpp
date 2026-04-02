@@ -26,7 +26,6 @@ void test_video_ex(){
 }
 
 void test_back_sub(){
-    constexpr int thresh_val{35};
     const std::string path_lib{"../images/back_sub"}; 
 
     Val::images_t images;
@@ -34,16 +33,27 @@ void test_back_sub(){
 
     Val::read_img_files(images);
 
+    for (auto& image: images.imgs_mat){
+        image = Img_P::convert_grayscale(image);
+    }
+    Val::images_t& grayed_images = images;
+    
+
+    for (auto& it = grayed_images.imgs_mat.begin(); it != grayed_images.imgs_mat.end(); it++){}
+
     cv::Mat grayed_img_1 = Img_P::convert_grayscale(images.imgs_mat.at(0));
     cv::Mat grayed_img_2 = Img_P::convert_grayscale(images.imgs_mat.at(1));
+    
 
-    cv::Mat del_B_img = Bg_sub::comp_and_threshold(grayed_img_1, grayed_img_2, 0, false);
-    cv::Mat del_B_img_thresh = Bg_sub::comp_and_threshold(grayed_img_1, grayed_img_2, thresh_val, true);
+    Bg_sub::del_B_mats_t del_B_mats = Bg_sub::comp_and_threshold(grayed_img_1, grayed_img_2, thresh_val, true);
+    uchar calc_thresh_val{Bg_sub::threshold_calc(del_B_mats.unthresh_bright, thresh_calc_dev)};
 
-    cv::Mat hist_del_B_img = Bg_sub::create_histogram(del_B_img, thresh_val, true);
+ 
+    
+    cv::Mat hist_del_B_img = Bg_sub::create_histogram(del_B_mats.unthresh, thresh_val, true);
 
-    cv::imshow("del_b_img Not Thresholded", del_B_img);
-    cv::imshow("del_b_img Thresholded", del_B_img_thresh);
+    cv::imshow("del_b_img Bright", del_B_mats.bright);
+    cv::imshow("del_b_img Shadow", del_B_mats.shadow);
     cv::imshow("hist_del_B_img", hist_del_B_img);
 
 

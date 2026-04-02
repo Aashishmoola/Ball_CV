@@ -4,20 +4,29 @@
 
 
 // TODO: Replace Bg_pt with cv::Point 
-// TODO: Seperate validation into a different layer.
+// TODO: Seperate validation into a different layer. Validation for these function types.
 
-const uchar test_threshold{140};
-const int k_size{3};
+// Prod consts
+constexpr std::array<int, 3> VALID_K_SIZES {3, 5, 7};
 
+// Dev consts
+// constexpr uchar TEST_THRESH{140};
+constexpr int K_SIZE{3};
+constexpr double THRESH_DEV{1.5};
 
-uchar threshold_calc(const cv::Mat img){
-    // Returns two estimated threshold value that is 2 stddev from mean 
+/**
+ * @param img unthesholded del B img, bright or not bright.
+ * @param deviation How much should the treshold value deviate from the mean
+ * @return Returns two estimated threshold value that is ${devation} stddev from mean 
+ */
+uchar Bg_sub::threshold_calc(const cv::Mat img, double deviation){
     // By nature of comp of del B, foreground will be lighter pixels
     cv::Scalar mean, stddev;
     cv::meanStdDev(img, mean, stddev);
-    return static_cast<uchar>(cvRound(mean[0] + 2.0 * stddev[0]));
+    uchar threshold = static_cast<uchar>(cvRound(mean[0] + deviation * stddev[0]));
+    std::cout << "Calc threshold val: " << static_cast<int>(threshold) << '\n';
+    return threshold;
 }
-
 
 cv::Mat Bg_sub::create_histogram(const cv::Mat& img, int thresh_index, bool should_print){
     cv::Mat hist_img;
@@ -30,7 +39,7 @@ cv::Mat Bg_sub::create_histogram(const cv::Mat& img, int thresh_index, bool shou
     if (should_print) {
         // Hist will start printing from the top left of the image
         constexpr int line_width{5};
-        constexpr int mask_index{20}; // Masks the first x values of the histogram {most freq background pixels} before normalization
+        constexpr int mask_index{25}; // Masks the first x values of the histogram {most freq background pixels} before normalization
         
         cv::Scalar white_color{255};
         cv::Scalar gray_color{128};
@@ -71,33 +80,50 @@ cv::Mat Bg_sub::create_histogram(const cv::Mat& img, int thresh_index, bool shou
     return hist_img;
 }
 
-// Can use cv::absdiff instead in needed.
-cv::Mat Bg_sub::comp_and_threshold(const cv::Mat& img_1, const cv::Mat& img_2, const uchar threshold, bool should_threshold){
+bool is_k_size_valid(int k_size){
+    for (const auto valid_k_size: VALID_K_SIZES){
+        if (k_size ==  valid_k_size) return true;
+    }
+    return false;
+}
+
+/**
+ * @param should_threshold Implemented and used only for testing purposed and not for anything else.
+ */
+Bg_sub::del_B_mats_t Bg_sub::comp_and_threshold(const cv::Mat& img_1, const cv::Mat& img_2, bool should_threshold, uchar threshold){
     
-    
-    // Initializing with the first image
-    cv::Mat out_img = cv::Mat::zeros(img_1.size(), img_2.type());
+    // Initializing with the first image //FIXME There has to be a better way to do this.
+    cv::Mat out_img_bright{cv::Mat::zeros(img_1.size(), img_1.type())};
+    cv::Mat out_img_shadow{cv::Mat::zeros(img_1.size(), img_1.type())};
+    cv::Mat out_img_unthresh{cv::Mat::zeros(img_1.size(), img_1.type())};
+    cv::Mat out_img_unthresh_bright{cv::Mat::zeros(img_1.size(), img_1.type())};
 
     const int img_rows{img_1.rows};
     const int img_cols{img_1.cols};
 
     // at method does bounds checking in debug mode
-    // int safe as only ++ing
     for (int i=0; i<img_rows; i++){
         for (int j=0; j<img_cols; j++) {
             // del_b --> change in brightness
             int del_b = static_cast<int>(img_2.at<uchar>(i, j)) - static_cast<int>(img_1.at<uchar>(i, j));
-            // nwing conv is fine here as it is not nrwing
-            
-            uchar del_b_char = static_cast<uchar>(std::abs(del_b));
+                        
+            //FIXME Checks every iteration
+            if (should_threshold) {
+                if (del_b > 0) {
+                    out_img_bright.at<uchar>(i,j) = (static_cast<uchar>(del_b) > threshold) ? 255 : 0;
+                } else if  (del_b < 0) {
+                    out_img_shadow.at<uchar>(i,j) = (static_cast<uchar>(-del_b) > threshold) ? 255 : 0;
+                } else continue; // Ignores static parts of the image -> del_b == 0;
+            } 
 
-            if (should_threshold) out_img.at<uchar>(i, j) = (del_b_char > threshold) ? 255 : 0;
-            else out_img.at<uchar>(i, j) = del_b_char;
+            out_img_unthresh.at<uchar>(i, j) = static_cast<uchar>(std::abs(del_b));
+            if (del_b > 0) out_img_unthresh_bright.at<uchar>(i,j) = static_cast<uchar>(del_b);
         }
     }
 
-    return out_img;
+    return del_B_mats_t{out_img_bright, out_img_shadow, out_img_unthresh, out_img_unthresh_bright};
 }
+
 // x and y are already relative indexes to the padded image, starting without the padding itself.  
 bool morph_min_max(const Bg_sub::pt_t& pt, const cv::Mat& k, const cv::Mat& padded_img, const uchar comp_val){
     int k_size{k.rows};
@@ -113,9 +139,9 @@ bool morph_min_max(const Bg_sub::pt_t& pt, const cv::Mat& k, const cv::Mat& padd
     return false;
 }
 
-cv::Mat morph_process(const cv::Mat& img, Bg_sub::BIN_P proc_type, const int k_size=3) {
+cv::Mat morph_process(const cv::Mat& img, Bg_sub::BIN_P proc_type, const int k_size) {
     // Image type validation should already be done.
-    if (!(k_size == 3 || k_size == 5 || k_size == 7)) {
+    if (!is_k_size_valid(k_size)) {
         throw std::invalid_argument("The kernal size should of size 3, 5 or 7.");
     }   
 
@@ -143,36 +169,45 @@ cv::Mat morph_process(const cv::Mat& img, Bg_sub::BIN_P proc_type, const int k_s
     return out_img;
 }
 
-cv::Mat morph_opening(const cv::Mat& img){
-    cv::Mat erosed_img = morph_process(img, Bg_sub::BIN_P::EROSION, k_size);
-    cv::Mat dialated_img = morph_process(erosed_img, Bg_sub::BIN_P::DIALATION, k_size);
+cv::Mat morph_opening(const cv::Mat& img, double erosion_k_size, double dialation_k_size){
+    cv::Mat erosed_img = morph_process(img, Bg_sub::BIN_P::EROSION, erosion_k_size);
+    cv::Mat dialated_img = morph_process(erosed_img, Bg_sub::BIN_P::DIALATION, dialation_k_size);
 
     return dialated_img;
 }
 
-cv::Mat morph_closing(const cv::Mat& img){
-    cv::Mat dialated_img = morph_process(img, Bg_sub::BIN_P::DIALATION, k_size);
-    cv::Mat erosed_img = morph_process(dialated_img, Bg_sub::BIN_P::EROSION, k_size);
+cv::Mat morph_closing(const cv::Mat& img, double erosion_k_size, double dialation_k_size){
+    cv::Mat dialated_img = morph_process(img, Bg_sub::BIN_P::DIALATION, dialation_k_size);
+    cv::Mat erosed_img = morph_process(dialated_img, Bg_sub::BIN_P::EROSION, erosion_k_size);
 
     return erosed_img;
+}
+
+bool validate_images(const cv::Mat& img_1, const cv::Mat& img_2){
+    /*
+        Type --> No. of channels (in each pixel) (1 --> greyscale, 3 --> BGR) 
+        + Data type of each channel value (CV_8U --> Unsigned int, 8 bits long)
+    */
+    if (img_1.size() != img_2.size() || img_1.type() != img_2.type()){
+        throw std::invalid_argument("Both inputted images are not of the same type or size");
+    }
 }
 
 cv::Mat Bg_sub::sub_algo(const cv::Mat& img_1, const cv::Mat& img_2){
     // 1. Calculate del B --> Map of del in pixel brighness due to motion
     // 2. Threshold --> filtering of large and small del B into binary values --> makes 1 more obvious 
     // 3. Removing noise and holes
-        // Opening(places small foreground artifacst into the background) --> Erosing >> Dialation 
-        // Closing(covers up small holes in the foregroung) --> Dialation >> Erosion
+        // Opening(removes small foreground artifacts) --> Erosing (Shrinks forground artifacts and boundaries) >> Dialation (Expands boundaries back to recreate original boundaries)
+        // Closing(covers up small holes in the foreground) --> Dialation >> Erosion
 
-    // Type --> No. of channels (in each pixel) (1 --> greyscale, 3 --> BGR) 
-    // + Data type of each channel value (CV_8U --> Unsigned int, 8 bits long)
-    if (img_1.size() != img_2.size() || img_1.type() != img_2.type()){
-        throw std::invalid_argument("Both inputted images are not of the same type");
-    }
+    // Opening with same kernal size to remove small foreground artifacts
+    Bg_sub::del_B_mats_t del_B_mats = comp_and_threshold(img_1, img_2, false);
+    uchar threshold = threshold_calc(del_B_mats.unthresh_bright, THRESH_DEV);
 
-    // Opening
-    cv::Mat thresh_img= comp_and_threshold(img_1, img_2, test_threshold);
-    return morph_opening(thresh_img);
+    cv::Mat thresholded_bright;
+    cv::threshold(del_B_mats.unthresh_bright, thresholded_bright, threshold, 255, cv::THRESH_BINARY);
+
+    return morph_opening(thresholded_bright, K_SIZE, K_SIZE);
 }
 
 

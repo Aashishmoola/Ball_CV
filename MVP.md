@@ -1,4 +1,5 @@
-# Creating a minimum viable product that seems to be working.
+# Creating a minimum viable product for my ball tracking product.
+
 
 ## Core modules:
 1. Ball Detection (fine, takes longer, eliptical? hugh transform): Image, timestamp(in image base name) --> Position of centre of ball (coordinates x, y), timestamp
@@ -22,17 +23,18 @@
     2. pos/ ve in m --> --> Calculating drag coefficient from filtered data. Algorithmic approach to Euler's method (No spin --> Magnus effect) --> Getting max distance and height in m. 
 
 
-## Status of each module: 
+## Status of each module/ General TODO: 
+### Mark with TODO for what has to be done today.
 
 1. --> Have to improve
-TODO: Dynamic threshold value calculation needs to be implemented and tested
-TODO: Shape of histogram for calculating the threshold val is flat after the values with minimal change have been removed.
-        - Change function to only show values that have increased in brightness. --> remove dbl artifact
-        - Dynamically calculate threshold appr
+    - TODO Implement the back_sub submodule to be called dyn for all images using main call function
+    - TODO Check if hugh transform can detect the ball after thresholding
+    - TODO Implement the hugh_transfrom submodule to be called dyn for all images using main call function 
+    - Clean-up the helper functions; rename semantically
 3. --> Not necessary for actual implementation. Will only be used if data has to be steamed as a video instead of a jpeg.
 7. --> Have to test and implement.
-TODO: Return velocity estimations (full state)
-TODO: Plot filter with matplot++ to see how many frames it takes to converge.
+    - Return velocity estimations (full state)
+    - Plot filter with matplot++ to see how many frames it takes to converge.
 8. --> Implementing
 
 
@@ -41,9 +43,6 @@ TODO: Plot filter with matplot++ to see how many frames it takes to converge.
 2. Will using a large open_source libraries, like opnecv create large binaries like opencv which will not be able to run on esp32 performantly. 
 3. Tradeoffs between Image type for fast processing applications. 
 
-## General TODO
-
-  
 
 ## General Notes
 Should use a middleware (layered semantically) architecture so data manipulation and modelling are done in layers and can be abstracted away/validated/tested/ interated upon easily --> with muliple benifts

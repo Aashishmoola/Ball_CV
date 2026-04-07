@@ -32,6 +32,12 @@
 6. Import std libs or third party libs in the .cpp file (the implementation file) or the header file only when used in the file itself.
 7. Do not outsource parsing of code (understanding syntax), understanding (mental compilation) and writing code (making design decisions) to claude. You are outsourcing the skill people are going to hire you for.
 8. Always do validation with false break/return cases instead of nested true cases. --> General Coding Antipattern
+9. The correct way to handle errors:
+    1. Scen 1: When the function is not able to execute its intended function at all due to caller error; inter-module, in main where they interface with each other --> throw error
+    2. Scen 2: When the function is not able to execute it intended function at all due to caller error; intra-module, within helper functions in the same module itseld --> Use assert
+    3. Scen 3: When programme/function is not able to run as intended, partially fail, but programme can still continue --> boolean values to possibly stop control flow in layer & logging
+    4. Scen 4: When programme fails due to expected non-user reason, default catch all --> Error codes
+    5. Scen 5: When function only fails strict/semantic checks --> Logging to warn user
 
 # Common errors
 1. All relative paths used are realtive to the root of the build dir as there is where the bin file is built.

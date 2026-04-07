@@ -29,8 +29,12 @@ CMakeFiles/ball_cv.dir/src/ball_det/back_sub/back_sub.cpp.o: /home/aashishrapsod
   /home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/utility.hpp \
   /home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/version.hpp \
   /home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/vsx_utils.hpp \
+  /home/aashishrapsodo/Libraries/opencv/modules/highgui/include/opencv2/highgui.hpp \
+  /home/aashishrapsodo/Libraries/opencv/modules/imgcodecs/include/opencv2/imgcodecs.hpp \
   /home/aashishrapsodo/Libraries/opencv/modules/imgproc/include/opencv2/imgproc.hpp \
   /home/aashishrapsodo/Libraries/opencv/modules/imgproc/include/opencv2/imgproc/segmentation.hpp \
+  /home/aashishrapsodo/Libraries/opencv/modules/videoio/include/opencv2/videoio.hpp \
+  /home/aashishrapsodo/rapsodo/repos/ball_cv/src/val/val.hpp \
   /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/back_sub/back_sub.hpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
@@ -1307,6 +1311,7 @@ CMakeFiles/ball_cv.dir/src/main.cpp.o: /home/aashishrapsodo/rapsodo/repos/ball_c
   /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/back_sub/back_sub.hpp \
   /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/h_transform/h_transform.hpp \
   /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/preproc/preproc.hpp \
+  /home/aashishrapsodo/rapsodo/repos/ball_cv/src/helpers/image_state.hpp \
   /home/aashishrapsodo/rapsodo/repos/ball_cv/src/val/val.hpp \
   /home/aashishrapsodo/rapsodo/repos/ball_cv/src/video_ex/video_ex.hpp \
   /usr/include/alloca.h \
@@ -2833,7 +2838,7 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 
 /home/aashishrapsodo/rapsodo/repos/ball_cv/src/video_ex/video_ex.hpp:
 
-/home/aashishrapsodo/rapsodo/repos/ball_cv/src/val/val.hpp:
+/home/aashishrapsodo/rapsodo/repos/ball_cv/src/helpers/image_state.hpp:
 
 /home/aashishrapsodo/rapsodo/repos/ball_cv/src/data_val_f/data_val_f.hpp:
 
@@ -2927,31 +2932,11 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
-/home/aashishrapsodo/Libraries/opencv/modules/flann/include/opencv2/flann/timer.h:
-
-/home/aashishrapsodo/Libraries/opencv/modules/videoio/include/opencv2/videoio.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
-/usr/include/c++/13/cctype:
+/usr/include/x86_64-linux-gnu/bits/types.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
-
-/usr/include/c++/13/ext/atomicity.h:
-
-/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
-
-/usr/include/c++/13/bits/vector.tcc:
-
-/usr/include/c++/13/bits/stl_function.h:
-
-/usr/include/c++/13/tr1/beta_function.tcc:
-
-/usr/include/c++/13/bits/uses_allocator_args.h:
-
-/usr/include/c++/13/bits/atomic_base.h:
+/usr/include/x86_64-linux-gnu/bits/time64.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
 
@@ -2962,10 +2947,6 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 /usr/include/c++/13/bits/align.h:
 
 /usr/include/c++/13/bits/unordered_map.h:
-
-/usr/include/c++/13/bits/new_allocator.h:
-
-/usr/include/c++/13/bits/stl_uninitialized.h:
 
 /usr/include/c++/13/bits/stl_vector.h:
 
@@ -3039,17 +3020,17 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 
 /usr/include/c++/13/bits/parse_numbers.h:
 
-/usr/include/c++/13/bits/stl_set.h:
+/usr/include/c++/13/bits/stl_function.h:
 
-/home/aashishrapsodo/Libraries/opencv/modules/imgcodecs/include/opencv2/imgcodecs.hpp:
-
-/home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/back_sub/back_sub.hpp:
-
-/usr/include/c++/13/bits/ostream_insert.h:
+/usr/include/c++/13/tr1/beta_function.tcc:
 
 /usr/include/c++/13/bits/move.h:
 
 /usr/include/c++/13/bits/locale_facets.h:
+
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
+
+/usr/include/c++/13/bits/locale_classes.h:
 
 /usr/include/c++/13/bits/stl_relops.h:
 
@@ -3075,30 +3056,6 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 
 /usr/include/c++/13/bits/istream.tcc:
 
-/usr/include/c++/13/bits/invoke.h:
-
-/home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/mat.hpp:
-
-/home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/ovx.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/byteswap.h:
-
-/usr/include/c++/13/bits/streambuf.tcc:
-
-/usr/include/c++/13/bits/specfun.h:
-
-/usr/include/c++/13/bits/basic_string.h:
-
-/home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/utils/logger.hpp:
-
-/usr/include/c++/13/tr1/poly_laguerre.tcc:
-
-/usr/include/c++/13/backward/binders.h:
-
-/usr/include/c++/13/bits/atomic_lockfree_defines.h:
-
-/usr/include/x86_64-linux-gnu/asm/errno.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
 /usr/include/c++/13/bits/charconv.h:
@@ -3119,10 +3076,6 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 
 /usr/include/c++/13/bits/exception.h:
 
-/usr/include/c++/13/bits/memory_resource.h:
-
-/usr/include/c++/13/streambuf:
-
 /home/aashishrapsodo/Libraries/opencv/modules/flann/include/opencv2/flann/any.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
@@ -3134,6 +3087,54 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 /home/aashishrapsodo/Libraries/opencv/modules/flann/include/opencv2/flann/miniflann.hpp:
 
 /usr/include/c++/13/typeinfo:
+
+/usr/include/c++/13/bits/cxxabi_forced.h:
+
+/usr/include/c++/13/ostream:
+
+/usr/include/c++/13/tr1/riemann_zeta.tcc:
+
+/usr/include/c++/13/bits/cpp_type_traits.h:
+
+/usr/include/c++/13/bits/streambuf.tcc:
+
+/usr/include/c++/13/bits/specfun.h:
+
+/usr/include/c++/13/bits/basic_string.h:
+
+/home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/utils/logger.hpp:
+
+/usr/include/c++/13/tr1/poly_laguerre.tcc:
+
+/home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/ovx.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap.h:
+
+/usr/include/c++/13/backward/binders.h:
+
+/usr/include/c++/13/bits/atomic_lockfree_defines.h:
+
+/usr/include/x86_64-linux-gnu/asm/errno.h:
+
+/usr/include/c++/13/streambuf:
+
+/usr/include/c++/13/bits/memory_resource.h:
+
+/usr/include/c++/13/bits/invoke.h:
+
+/home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/mat.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
+
+/usr/include/asm-generic/errno.h:
+
+/home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/preproc/preproc.cpp:
+
+/home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/matx.inl.hpp:
+
+/usr/include/c++/13/bits/fs_fwd.h:
+
+/home/aashishrapsodo/Libraries/opencv/modules/imgproc/include/opencv2/imgproc.hpp:
 
 /usr/include/c++/13/filesystem:
 
@@ -3149,23 +3150,11 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 
 /home/aashishrapsodo/Libraries/opencv/build/opencv2/opencv_modules.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
-
-/usr/include/asm-generic/errno.h:
-
-/usr/include/c++/13/bits/fs_fwd.h:
-
-/home/aashishrapsodo/Libraries/opencv/modules/imgproc/include/opencv2/imgproc.hpp:
-
-/home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/preproc/preproc.cpp:
-
-/home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/matx.inl.hpp:
-
-/home/aashishrapsodo/rapsodo/repos/ball_cv/src/met_calc/met_calc.hpp:
-
-/home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/matx.hpp:
-
 /usr/include/c++/13/bits/localefwd.h:
+
+/usr/include/c++/13/bits/streambuf_iterator.h:
+
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
 
@@ -3181,9 +3170,17 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 
 /usr/include/c++/13/bits/basic_ios.h:
 
-/usr/include/x86_64-linux-gnu/bits/time64.h:
+/usr/include/c++/13/bits/stl_set.h:
 
-/usr/include/c++/13/bits/cxxabi_forced.h:
+/home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/back_sub/back_sub.hpp:
+
+/usr/include/c++/13/bits/ostream_insert.h:
+
+/home/aashishrapsodo/Libraries/opencv/modules/imgcodecs/include/opencv2/imgcodecs.hpp:
+
+/home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/persistence.hpp:
+
+/usr/include/features-time64.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
 
@@ -3227,15 +3224,7 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 
 /home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/operations.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/long-double.h:
-
-/usr/include/c++/13/bits/algorithmfwd.h:
-
 /usr/include/x86_64-linux-gnu/bits/fp-logb.h:
-
-/home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/persistence.hpp:
-
-/usr/include/features-time64.h:
 
 /usr/include/c++/13/bits/alloc_traits.h:
 
@@ -3246,6 +3235,32 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h:
 
 /usr/include/ctype.h:
+
+/usr/include/c++/13/bits/stl_uninitialized.h:
+
+/usr/include/c++/13/bits/new_allocator.h:
+
+/usr/include/c++/13/bits/atomic_base.h:
+
+/usr/include/c++/13/bits/uses_allocator_args.h:
+
+/usr/include/c++/13/bits/algorithmfwd.h:
+
+/usr/include/x86_64-linux-gnu/bits/long-double.h:
+
+/home/aashishrapsodo/Libraries/opencv/modules/flann/include/opencv2/flann/timer.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
+
+/home/aashishrapsodo/Libraries/opencv/modules/videoio/include/opencv2/videoio.hpp:
+
+/usr/include/c++/13/vector:
+
+/home/aashishrapsodo/rapsodo/repos/ball_cv/src/met_calc/met_calc.hpp:
+
+/home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/matx.hpp:
+
+/home/aashishrapsodo/rapsodo/repos/ball_cv/src/val/val.hpp:
 
 /home/aashishrapsodo/Libraries/opencv/modules/objdetect/include/opencv2/objdetect/face.hpp:
 
@@ -3289,9 +3304,9 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 
 /home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/vsx_utils.hpp:
 
-/usr/include/c++/13/tr1/gamma.tcc:
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
-/home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/cvdef.h:
+/usr/include/c++/13/string:
 
 /home/aashishrapsodo/rapsodo/repos/ball_cv/src/ball_det/h_transform/h_transform.hpp:
 
@@ -3325,21 +3340,19 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 
 /usr/include/c++/13/bits/shared_ptr_base.h:
 
-/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+/usr/include/c++/13/bits/vector.tcc:
 
-/usr/include/c++/13/bits/streambuf_iterator.h:
+/usr/include/c++/13/cctype:
 
-/usr/include/c++/13/ostream:
+/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
 
-/usr/include/c++/13/tr1/riemann_zeta.tcc:
+/usr/include/c++/13/ext/atomicity.h:
 
-/usr/include/c++/13/bits/cpp_type_traits.h:
+/home/aashishrapsodo/Libraries/opencv/modules/core/include/opencv2/core/cvdef.h:
 
-/usr/include/c++/13/string:
+/usr/include/c++/13/tr1/gamma.tcc:
 
-/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
-
-/usr/include/x86_64-linux-gnu/bits/types.h:
+/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
 
 /usr/include/c++/13/cerrno:
 
@@ -3356,10 +3369,6 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 /home/aashishrapsodo/Libraries/opencv/modules/objdetect/include/opencv2/objdetect/barcode.hpp:
 
 /usr/include/c++/13/complex:
-
-/usr/include/c++/13/bits/locale_classes.h:
-
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
 
 /home/aashishrapsodo/Libraries/opencv/modules/stitching/include/opencv2/stitching/detail/seam_finders.hpp:
 
@@ -3499,8 +3508,6 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 
 /usr/include/c++/13/utility:
 
-/usr/include/c++/13/vector:
-
 /usr/include/features.h:
 
 /usr/include/c++/13/debug/debug.h:
@@ -3577,10 +3584,10 @@ CMakeFiles/ball_cv.dir/src/video_ex/video_ex.cpp.o: /home/aashishrapsodo/rapsodo
 
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 
-/usr/include/x86_64-linux-gnu/bits/select.h:
-
-/usr/include/x86_64-linux-gnu/bits/time.h:
+/usr/include/x86_64-linux-gnu/bits/timex.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
 
-/usr/include/x86_64-linux-gnu/bits/timex.h:
+/usr/include/x86_64-linux-gnu/bits/select.h:
+
+/usr/include/x86_64-linux-gnu/bits/time.h:

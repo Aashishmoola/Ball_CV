@@ -6,13 +6,11 @@
 #include <vector>
 #include <iostream>
 
-namespace Val{
-    struct images_t{
-        std::vector<cv::Mat> imgs_mat; 
-        std::vector<std::string> f_names;
-        std::string path;
-        int size{0};
-    };
+// FIXME Should this be here?
+using Images = std::vector<std::pair<std::string, cv::Mat>>;
 
-    bool read_img_files(images_t& images);
+namespace Val{
+
+    bool read_img_files(Images& images, const std::string& lib_path);
+    void validate_images(const cv::Mat& img_1, const cv::Mat& img_2);
 }

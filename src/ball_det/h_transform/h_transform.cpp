@@ -1,5 +1,12 @@
 #include "h_transform.hpp"
 
+
+constexpr double MIN_BALL_AREA{3000.0};
+constexpr double MAX_BALL_AREA{10000.0};
+constexpr double MIN_CIRCULARITY{0.3}; // 1 is perfect, 0 is imperfect
+
+
+
 void H_trans::print_circle_cand(const H_trans::Circle& circle_cand){
     if (circle_cand.empty()) {
         std::cout << "The are no circle candidates found in the hough transform" << '\n';
@@ -35,7 +42,7 @@ void H_trans::draw_circles(const H_trans::Circle& circle_cand, cv::Mat& img, dou
 }
 
 // Prints and draws the circles detected also
-cv::Mat H_trans::transform(cv::Mat& img){
+bool H_trans::transform(cv::Mat& img){
     H_trans::Circle circle_cand{};
     // H_trans::Circle test_circle_cand{{1.0,2.0,3.0}, {2.0, 2.0, 2.0}};
     
@@ -51,7 +58,63 @@ cv::Mat H_trans::transform(cv::Mat& img){
     
     H_trans::print_circle_cand(circle_cand);
     H_trans::draw_circles(circle_cand, img, 0.35);
-
-    return img;
-    
+    return true;
 }
+
+
+// Start of contours file:
+using Contour = std::vector<cv::Point>;
+using Contours = std::vector<Contour>;
+using Circles = std::vector<cv::Vec3f>;
+
+/**
+ * @param img Takes in thresholded image
+ * @return An Vec3f that holds x_coord, y_coord and radius (all floats) in order
+ */
+void findCircleCand(const cv::Mat& img, Circles& out_circles){
+    Contours raw_contours;
+    cv::findContours(img, raw_contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
+
+    // Filter out unlikely circle candidates
+    Contours circle_contours;
+    for (const auto& contour : raw_contours){
+        double area = cv::contourArea(contour);
+        double perimeter = cv::arcLength(contour, true);
+        
+        double circularity = (4 * M_PI * area) / (perimeter * perimeter);
+
+        if (circularity < MIN_CIRCULARITY){
+            std::cout << "A contour has been eliminated due to low circularity." << '\n';
+            continue;
+        }
+
+        std::cout << area << '\n';
+        if (area < MIN_BALL_AREA || area > MAX_BALL_AREA) {
+            std::cout << "A ball artifact that is too small or large has been eliminated. " << '\n';
+            continue;
+        }
+
+        circle_contours.push_back(contour);
+        std::cout << "A ball artifact has been detected successfully." << '\n';
+    }
+
+    // Get approx radius and center of circle 
+    for (const auto& contour : circle_contours){
+        cv::Point2f centre;
+        float radius;
+        cv::minEnclosingCircle(contour, centre, radius);
+
+        cv::Vec3f circle{centre.x, centre.y, radius};
+        out_circles.push_back(circle);
+    }
+}
+
+void H_trans::findBallCand(cv::Mat& img){
+    Circles found_circles;
+    findCircleCand(img, found_circles);
+
+    H_trans::print_circle_cand(found_circles);
+    H_trans::draw_circles(found_circles, img);
+}
+
+// End of countour file

@@ -1,4 +1,5 @@
 #include "back_sub.hpp"
+#include "../../val/val.hpp"
 
 #include <opencv2/imgproc.hpp>
 
@@ -28,7 +29,15 @@ uchar Bg_sub::threshold_calc(const cv::Mat img, double deviation){
     return threshold;
 }
 
-cv::Mat Bg_sub::create_histogram(const cv::Mat& img, int thresh_index, bool should_print){
+/**
+ * @param mask_size // Masks the first x values of the histogram {most freq background pixels} before normalization
+ */
+cv::Mat Bg_sub::create_histogram(const cv::Mat& img, uchar thresh_indicator, int mask_size,  bool should_print){
+    if (mask_size < 0 || mask_size > 256) {
+        throw std::invalid_argument("Mask size is not within uchar range.");
+    }
+    int mask_index{mask_size - 1};
+
     cv::Mat hist_img;
     std::vector<int> channels{0}; // Channel index not number
     std::vector<int>hist_size{256};
@@ -39,8 +48,7 @@ cv::Mat Bg_sub::create_histogram(const cv::Mat& img, int thresh_index, bool shou
     if (should_print) {
         // Hist will start printing from the top left of the image
         constexpr int line_width{5};
-        constexpr int mask_index{25}; // Masks the first x values of the histogram {most freq background pixels} before normalization
-        
+
         cv::Scalar white_color{255};
         cv::Scalar gray_color{128};
         
@@ -66,7 +74,7 @@ cv::Mat Bg_sub::create_histogram(const cv::Mat& img, int thresh_index, bool shou
         for (int i=0;i<hist_img_cols;i++){
             int freq_count{static_cast<int>(hist_img_norm.at<float>(i) * img_disp_rows_scale)};
             for (int j=i*line_width;j<i*line_width+line_width;j++){
-                if (i==thresh_index){
+                if (i==static_cast<int>(thresh_indicator)){
                     cv::line(hist_img_disp, cv::Point{j, 0}, cv::Point{j, freq_count}, white_color, 1);
                 } else {
                     cv::line(hist_img_disp, cv::Point{j, 0}, cv::Point{j, freq_count}, gray_color, 1);
@@ -141,10 +149,8 @@ bool morph_min_max(const Bg_sub::pt_t& pt, const cv::Mat& k, const cv::Mat& padd
 
 cv::Mat morph_process(const cv::Mat& img, Bg_sub::BIN_P proc_type, const int k_size) {
     // Image type validation should already be done.
-    if (!is_k_size_valid(k_size)) {
-        throw std::invalid_argument("The kernal size should of size 3, 5 or 7.");
-    }   
-
+    assert (is_k_size_valid(k_size) && "The kernal size should of size 3, 5 or 7.");
+ 
     // Create the return mat
     cv::Mat out_img = cv::Mat::zeros(img.size(), img.type());
 
@@ -183,17 +189,9 @@ cv::Mat morph_closing(const cv::Mat& img, double erosion_k_size, double dialatio
     return erosed_img;
 }
 
-bool validate_images(const cv::Mat& img_1, const cv::Mat& img_2){
-    /*
-        Type --> No. of channels (in each pixel) (1 --> greyscale, 3 --> BGR) 
-        + Data type of each channel value (CV_8U --> Unsigned int, 8 bits long)
-    */
-    if (img_1.size() != img_2.size() || img_1.type() != img_2.type()){
-        throw std::invalid_argument("Both inputted images are not of the same type or size");
-    }
-}
-
 cv::Mat Bg_sub::sub_algo(const cv::Mat& img_1, const cv::Mat& img_2){
+    Val::validate_images(img_1, img_2);
+
     // 1. Calculate del B --> Map of del in pixel brighness due to motion
     // 2. Threshold --> filtering of large and small del B into binary values --> makes 1 more obvious 
     // 3. Removing noise and holes
@@ -204,8 +202,12 @@ cv::Mat Bg_sub::sub_algo(const cv::Mat& img_1, const cv::Mat& img_2){
     Bg_sub::del_B_mats_t del_B_mats = comp_and_threshold(img_1, img_2, false);
     uchar threshold = threshold_calc(del_B_mats.unthresh_bright, THRESH_DEV);
 
+    // Thersholding in another layer as threshold value needs to be dyn calc
     cv::Mat thresholded_bright;
     cv::threshold(del_B_mats.unthresh_bright, thresholded_bright, threshold, 255, cv::THRESH_BINARY);
+
+    // Showing hist also
+    cv::imshow("Created histogram", create_histogram(del_B_mats.unthresh_bright, threshold, 20, true));
 
     return morph_opening(thresholded_bright, K_SIZE, K_SIZE);
 }

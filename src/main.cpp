@@ -3,6 +3,7 @@
 #include "ball_det/back_sub/back_sub.hpp"
 #include "ball_det/h_transform/h_transform.hpp"
 #include "val/val.hpp"
+#include "helpers/image_state.hpp"
 
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
@@ -10,6 +11,7 @@
 #include <filesystem>
 #include <iostream>
 namespace fs = std::filesystem;
+
 
 cv::Mat test_img_preproc(const std::string& full_src_name){
     // Read file:
@@ -21,61 +23,49 @@ cv::Mat test_img_preproc(const std::string& full_src_name){
     return blurred_img;
 }
 
-void test_video_ex(){
-    // Vid_ex::process_frames();
+std::string proc_img_name(std::string A, std::string B){
+    int start_i = B.rfind("_");
+    int end_i = B.size() - 1;
+    return A.append(B.substr(start_i, end_i - start_i + 1));
 }
 
-void test_back_sub(){
-    const std::string path_lib{"../images/back_sub"}; 
+void test_ball_det(){
+    const std::string img_lib_path{"../images/back_sub"}; 
 
-    Val::images_t images;
-    images.path = path_lib;
+    Images raw_images;
+    Val::read_img_files(raw_images, img_lib_path);
 
-    Val::read_img_files(images);
-
-    for (auto& image: images.imgs_mat){
+    for (auto& [name, image]: raw_images){
         image = Img_P::convert_grayscale(image);
     }
-    Val::images_t& grayed_images = images;
+    Images& grayed_images = raw_images;
     
+    Images proc_images;
+    for (auto it = grayed_images.begin(); it != grayed_images.end() - 1; it++){
+        auto [name_1, image_1] = *it;
+        auto [name_2, image_2] = *(it + 1);
 
-    for (auto& it = grayed_images.imgs_mat.begin(); it != grayed_images.imgs_mat.end(); it++){}
+        Image img_map = std::make_pair(proc_img_name(name_1, name_2), Bg_sub::sub_algo(image_1, image_2));
 
-    cv::Mat grayed_img_1 = Img_P::convert_grayscale(images.imgs_mat.at(0));
-    cv::Mat grayed_img_2 = Img_P::convert_grayscale(images.imgs_mat.at(1));
-    
+        proc_images.push_back(img_map);
+    }
 
-    Bg_sub::del_B_mats_t del_B_mats = Bg_sub::comp_and_threshold(grayed_img_1, grayed_img_2, thresh_val, true);
-    uchar calc_thresh_val{Bg_sub::threshold_calc(del_B_mats.unthresh_bright, thresh_calc_dev)};
+    // Runs hough transform and print image before and after circle drawn
+    for (auto& [name, image]: proc_images){
+        cv::imshow(name + "_before H_trans", image);
+        // FIXME not working due to inverse threshold; ball must be white.
+        H_trans::findBallCand(image);
+        cv::imshow(name + "after_H_trans", image);
 
- 
-    
-    cv::Mat hist_del_B_img = Bg_sub::create_histogram(del_B_mats.unthresh, thresh_val, true);
-
-    cv::imshow("del_b_img Bright", del_B_mats.bright);
-    cv::imshow("del_b_img Shadow", del_B_mats.shadow);
-    cv::imshow("hist_del_B_img", hist_del_B_img);
-
-
-
-    // cv::Mat processed_img = Bg_sub::sub_algo(grayed_img_1, grayed_img_2);
-
-    // cv::Mat combined_preproc;
-    // cv::Mat combined_postproc;
-    // cv::vconcat(img_1, img_2, combined_preproc);
-    // cv::vconcat(del_B_threshold_img, processed_img, combined_postproc);
-
-    // cv::imshow("Combined Preprocessed", combined_preproc);
-    // cv::imshow("Combined PostProcessed", combined_postproc);
+        std::cout << "Showing image: " << name << '\n';
+    }
 
     cv::waitKey(0);
 }
 
 
 int main(){
-    // test_img_preproc("/home/aashishrapsodo/rapsodo/repos/ball_cv/images/golf_test_img.jpg");
-    // test_video_ex();
 
-    test_back_sub();
+    test_ball_det();
     return 0;
 }

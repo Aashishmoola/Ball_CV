@@ -273,6 +273,7 @@ CMakeFiles/ball_cv.dir/src/main.cpp.o: \
  /home/aashishrapsodo/Libraries/opencv/modules/imgcodecs/include/opencv2/imgcodecs.hpp \
  /home/aashishrapsodo/Libraries/opencv/modules/highgui/include/opencv2/highgui.hpp \
  /home/aashishrapsodo/Libraries/opencv/modules/videoio/include/opencv2/videoio.hpp \
+ /home/aashishrapsodo/rapsodo/repos/ball_cv/src/helpers/image_state.hpp \
  /usr/include/c++/13/filesystem /usr/include/c++/13/bits/fs_fwd.h \
  /usr/include/c++/13/bits/fs_path.h /usr/include/c++/13/locale \
  /usr/include/c++/13/bits/locale_facets_nonio.h \

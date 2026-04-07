@@ -2,7 +2,7 @@
 
 
 ## Core modules:
-1. Ball Detection (fine, takes longer, eliptical? hugh transform): Image, timestamp(in image base name) --> Position of centre of ball (coordinates x, y), timestamp
+1. Ball Detection (fine, takes longer, Contour detection(Elipse)): Image, timestamp(in image base name) --> Position of centre of ball (coordinates x, y), timestamp
     - Preprocessing: Folder of images, timestamp labelled --> Folder of images, t have features extracted maximally. 
     - Hugh Transform: Feature extracted images, t --> Position of centre of ball (coordinates x, y), t
 
@@ -27,9 +27,8 @@
 ### Mark with TODO for what has to be done today.
 
 1. --> Have to improve
-    - TODO Implement the back_sub submodule to be called dyn for all images using main call function
-    - TODO Check if hugh transform can detect the ball after thresholding
-    - TODO Implement the hugh_transfrom submodule to be called dyn for all images using main call function 
+    - TODO Implement a countour finding algorithm, use openCV one for now and assume it is a circle
+    - Use openCV contour finding algo that gives ball pos coordinates
     - Clean-up the helper functions; rename semantically
 3. --> Not necessary for actual implementation. Will only be used if data has to be steamed as a video instead of a jpeg.
 7. --> Have to test and implement.
@@ -42,14 +41,22 @@
 1. For fast moving objects --> Exposure length will be too short to capture sufficient frames to calculate drag coeffcient --> Use Drag lookup drag coeffcient values.
 2. Will using a large open_source libraries, like opnecv create large binaries like opencv which will not be able to run on esp32 performantly. 
 3. Tradeoffs between Image type for fast processing applications. 
+4. Diff types of ball detection algo arcitecture:
+    1. Hough transform(raw, blurred, greyscale image) : Slow, inaccurate does not fully utilise countour finding from del B images, performs well on occluded and eliptical ball artifacts
+    2. Skytrax: Faster, used del B image, does not perform well on occluded and eliptical ball artifacts
+        raw image -> Background sub -> Thresholding -> Contouring --> approx radius, centre coords + ROI
+        Sobel Edge Detection on ROI --> edges -> dir of edges
+        PPV on direction of edges --> accurate radius, centre coords
 
 
 ## General Notes
-Should use a middleware (layered semantically) architecture so data manipulation and modelling are done in layers and can be abstracted away/validated/tested/ interated upon easily --> with muliple benifts
+1. Should use a middleware (layered semantically) architecture so data manipulation and modelling are done in layers and can be abstracted away/validated/tested/ interated upon easily --> with muliple benifts
 
-Getting a good threshold value that leads to maximum seperation between foreground and background for delta B image:
+2. Getting a good threshold value that leads to maximum seperation between foreground and background for delta B image:
     Best: OTSU algorithm (Generates histogram for mat --> for all range of thresholds computes interclass variance --> returns threshold value with greatest variance)
-    Ok: Using threshold that is two std dev away from mean
+    Ok: Using threshold that is (two) std dev away from mean
 
 cv::Scalar --> maps to double[4], usually required to hold values for RGBA pixel values
+
+
 

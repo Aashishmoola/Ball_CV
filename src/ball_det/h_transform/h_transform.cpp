@@ -67,6 +67,7 @@ using Contour = std::vector<cv::Point>;
 using Contours = std::vector<Contour>;
 using Circles = std::vector<cv::Vec3f>;
 
+// FIXME change name to snake_case
 /**
  * @param img Takes in thresholded image
  * @return An Vec3f that holds x_coord, y_coord and radius (all floats) in order

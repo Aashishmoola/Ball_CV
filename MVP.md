@@ -26,15 +26,19 @@
 ## Status of each module/ General TODO: 
 ### Mark with TODO for what has to be done today.
 
+TODO: Should all constants be grouped together in the same file, to be tuned while those that are static unless architecture change remain in the modules
+
 1. --> Have to improve
-    - TODO Implement a countour finding algorithm, use openCV one for now and assume it is a circle
-    - Use openCV contour finding algo that gives ball pos coordinates
+    - TODO Implement circles to ball state conversion function (Convert to metric also after camera calibration)
     - Clean-up the helper functions; rename semantically
 3. --> Not necessary for actual implementation. Will only be used if data has to be steamed as a video instead of a jpeg.
-7. --> Have to test and implement.
+7. --> Have to link -> test
+    - Implement main loop itself
     - Return velocity estimations (full state)
     - Plot filter with matplot++ to see how many frames it takes to converge.
-8. --> Implementing
+8. --> Have to link -> test
+    - TODO Remove convert to metric ball option.
+
 
 
 ## Trade Offs

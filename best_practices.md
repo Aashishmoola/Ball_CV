@@ -26,7 +26,7 @@
     - Use constexpr if possible. 
     - Seperate dev and prod constants with comments.
 2. Use scoped enums for switches instead of bool vals (no semantic meaning);
-3. Use consistenly named namespaces for each module
+3. Use consistenly formatted namespaces for each module
 4. Global helpers module should contain functions that are really global --> Does opencv or other third party libs not have this helper function that you have to implement yourself?
 5. In terms of naming conventions --> The larger the scope, the more distinct and readable the names for objects, rvalues has to be.
 6. Import std libs or third party libs in the .cpp file (the implementation file) or the header file only when used in the file itself.
@@ -38,16 +38,17 @@
     3. Scen 3: When programme/function is not able to run as intended, partially fail, but programme can still continue --> boolean values to possibly stop control flow in layer & logging
     4. Scen 4: When programme fails due to expected non-user reason, default catch all --> Error codes
     5. Scen 5: When function only fails strict/semantic checks --> Logging to warn user
+10. Use inline constepxr header file enclosed within a namespace for truly global constants that affect multiple modules and/or can be tuned.
 
 # Common errors
-1. All relative paths used are realtive to the root of the build dir as there is where the bin file is built.
+1. All relative paths used are relative to the root of the build dir as there is where the bin file is built.
 
 
 # Specific guidelines for this project
 - Make sure to upload into git after each iteration.
 - Make sure to use claude CLI with claude getting updated context to MVP.md to answer specifically to context. 
 - cv::Mat optimises copies by only copying headers of the matrix instead of entire matrix --> works like a shared pointer
-    - Header (stack): rows, cols, type, step, and a uchar* data     pointer                                      
+    - Header (stack): rows, cols, type, step, and a uchar* data pointer                                      
     - Data (heap): the actual pixel buffer, with a int* refcount alongside it 
 
 1. Take in cv::Mat by ref --> To prevent unnecessary copy of header during param initialization

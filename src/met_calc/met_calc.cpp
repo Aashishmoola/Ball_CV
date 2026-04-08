@@ -1,8 +1,4 @@
 #include "met_calc.hpp"
-#include "../data_val_f/data_val_f.hpp"
-#include "../helpers/ball_state.hpp"
-#include <iostream>
-#include <cmath>
 
 /*
     Use camera configuration to get focal length
@@ -10,13 +6,12 @@
     (Assume no 3D motion yet, the size of the ball/ streak changes size --> movement along z dir, need to handle later)
 */
 
+// Prod consts
+constexpr double G_FIELD_CONST{9.80665};
 
-constexpr double T_STEP = 0.001; // In s
-constexpr double FPS = 30.0;
-constexpr double T_STEP_FRAME = 1.0/FPS;
+// Dev consts
 
-// TODO Need to get these metrics, implement getter functions for these in a diff module
-// Using hardcoded dummy constants for testing now
+// Dummy consts
 constexpr double BALL_MASS = 0.057; // In kg
 constexpr double F_LEN = 1;
 constexpr double Y_OFFSET = 1;
@@ -46,7 +41,7 @@ double get_drag_comp(const Ball_states& ball_states, double dt) {
         auto& next_b = *std::next(b);
  
         double a_x = (next_b.x_v - curr_b.x_v)/dt; 
-        double a_y = (next_b.y_v - curr_b.y_v)/dt - Met_calc::G_FIELD_CONST;
+        double a_y = (next_b.y_v - curr_b.y_v)/dt - G_FIELD_CONST;
 
         double a = std::sqrt((a_x * a_x) + (a_y * a_y));
 
@@ -92,7 +87,7 @@ ball_disp_t get_max_disp(const Ball_states& b_states, double m, double k, double
         v_x = v_x + a_x * dt;
         disp_x = disp_x + v_x * dt;
 
-        double a_y = -1/m * k * v * v_y - Met_calc::G_FIELD_CONST;
+        double a_y = -1/m * k * v * v_y - G_FIELD_CONST;
         v_y = v_y + a_y * dt;
         disp_y = disp_y + v_y * dt;
 
@@ -114,9 +109,9 @@ void print_ball_max_disp(const ball_disp_t& b){
  */
 ball_disp_t cal_met(Ball_states& b_states){
     convert_ball_states_metric(b_states);
-    double k = get_drag_comp(b_states, T_STEP_FRAME);
+    double k = get_drag_comp(b_states, C::T_STEP_FRAME);
 
-    auto ball_disp = get_max_disp(b_states, BALL_MASS, k, T_STEP, Y_OFFSET);
+    auto ball_disp = get_max_disp(b_states, BALL_MASS, k, C::T_STEP, Y_OFFSET);
     print_ball_max_disp(ball_disp);
     return ball_disp;
 }

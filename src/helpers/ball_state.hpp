@@ -18,3 +18,9 @@ struct ball_disp_t{
 };
 
 using Ball_states = std::vector<ball_state_t>;
+
+using Contour = std::vector<cv::Point>;
+using Contours = std::vector<Contour>;
+
+using Circle = cv::Vec3f;
+using Circles = std::vector<Circle>;

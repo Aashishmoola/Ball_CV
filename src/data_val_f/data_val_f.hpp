@@ -1,6 +1,9 @@
-#include <opencv2/core.hpp>
-
 #pragma once
+
+#include "../helpers/ball_state.hpp"
+#include "../helpers/constants.hpp"
+
+#include <opencv2/core.hpp>
 
 // FIXME Check is process noise it significant to model drag that is consistent 
 class K_fil_2D {
@@ -26,6 +29,9 @@ class K_fil_2D {
 
         cv::Matx41d B_; // state offset (v_y) matrix : acceleration due to gravity
 };
+
+using Ball_pos_state = cv::Matx21d;
+using Ball_pos_states = std::vector<Ball_pos_state>;
 
 
 

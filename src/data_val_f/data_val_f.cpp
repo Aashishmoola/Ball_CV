@@ -1,7 +1,13 @@
 #include "data_val_f.hpp"
 
-#include <iostream>
-// Give the true state of the posiion and velocity of the ball even when there is noisy measured data(ball detection errors) and process noise (acceleration --> del v)
+// Give the true state of the position and velocity of the ball even when there is noisy measured data(ball detection errors) and process noise (acceleration --> del v)
+// Converts form circle(returned from ball det) -> ball_pos_state (used by the filter itself) -> ball_state (used in met_calc)
+
+
+constexpr double P_NOISE {10}; // Air drag and Magnus effect q~10-50 at 4 frames/ 60fps or 5 - 15 at 12 frames /60 fps
+constexpr double M_NOISE {0}; // Need in both x and y dir, based on camera calibration
+
+
 
 /**
  * @param q Process Noise
@@ -78,3 +84,46 @@ cv::Matx21d K_fil_2D::update(const cv::Matx21d& z){
     return H_ * x_;
 
 }
+
+void circles_to_ball_pos_states(const Circles& circles, Ball_pos_states& states){
+    for (const auto& circle : circles){
+        Ball_pos_state state {circle[0], circle[1]};
+        states.push_back(state);
+    }
+}
+
+void ball_pos_to_state(const Ball_pos_states& pos_states, Ball_states states) {
+    for (auto it = pos_states.begin(); it != pos_states.end()-1; it++){
+        auto curr = *it;
+        auto next = *(it+1);
+
+        auto new_v_x = (next(0, 0) - curr(0, 0)) / C::T_STEP_FRAME;
+        auto new_v_y = (next(0, 1) - curr(0, 1)) / C::T_STEP_FRAME;
+
+        // Access with col, row syntax for 2D matrixes
+        ball_state_t new_state{next(0, 0), next(0, 1), new_v_x, new_v_y, true};
+        states.push_back(new_state);
+    }
+}
+
+
+void run_k_filter(const Circles& circles, Ball_states& ball_states){
+    Ball_pos_states pos_states;
+    Ball_states states;
+
+    circles_to_ball_pos_states(circles, pos_states);
+
+    /*
+        predict()
+
+        if ball is det:
+            update(meas)
+            push update result
+        else :
+            push predict result
+    */
+
+}
+
+
+

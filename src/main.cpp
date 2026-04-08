@@ -51,10 +51,10 @@ void test_ball_det(){
     }
 
     // Runs hough transform and print image before and after circle drawn
+    Circles circles;
     for (auto& [name, image]: proc_images){
         cv::imshow(name + "_before H_trans", image);
-        // FIXME not working due to inverse threshold; ball must be white.
-        H_trans::findBallCand(image);
+        Trans::find_ball_cand(image, circles);
         cv::imshow(name + "after_H_trans", image);
 
         std::cout << "Showing image: " << name << '\n';

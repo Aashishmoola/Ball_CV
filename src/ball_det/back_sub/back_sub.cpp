@@ -169,7 +169,12 @@ cv::Mat morph_process(const cv::Mat& img, Bg_sub::BIN_P proc_type, const int k_s
     //out_image.size == img.size
     for (int i=p_size; i<padded_img.rows-p_size; i++){
         for (int j=p_size; j<padded_img.cols-p_size; j++){
+            if (proc_type == Bg_sub::BIN_P::DIALATION)
+            // If any neighbor is 255 -> pixel to 255 (Expands white regions)
             out_img.at<uchar>(i-p_size,j-p_size) = morph_min_max(Bg_sub::pt_t{i, j}, k, padded_img, comp_val) ? 255 : 0;
+        else
+            // If any neighbor is 0 -> pixle is 0 (Shrinks white regions)
+            out_img.at<uchar>(i-p_size,j-p_size) = morph_min_max(Bg_sub::pt_t{i, j}, k, padded_img, comp_val) ? 0 : 255;
         }
     }
     return out_img;

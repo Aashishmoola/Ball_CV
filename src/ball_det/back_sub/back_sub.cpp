@@ -1,19 +1,12 @@
 #include "back_sub.hpp"
 #include "../../val/val.hpp"
+#include "../../helpers/tuning_params.hpp"
 
 #include <opencv2/imgproc.hpp>
 
 
-// TODO: Replace Bg_pt with cv::Point 
+// TODO: Replace Bg_pt with cv::Point
 // TODO: Seperate validation into a different layer. Validation for these function types.
-
-// Prod consts
-constexpr std::array<int, 3> VALID_K_SIZES {3, 5, 7};
-
-// Dev consts
-// constexpr uchar TEST_THRESH{140};
-constexpr int K_SIZE{3};
-constexpr double THRESH_DEV{1.5};
 
 /**
  * @param img unthesholded del B img, bright or not bright.
@@ -89,7 +82,7 @@ cv::Mat Bg_sub::create_histogram(const cv::Mat& img, uchar thresh_indicator, int
 }
 
 bool is_k_size_valid(int k_size){
-    for (const auto valid_k_size: VALID_K_SIZES){
+    for (const auto valid_k_size: Config::Tuning::VALID_K_SIZES){
         if (k_size ==  valid_k_size) return true;
     }
     return false;
@@ -205,7 +198,7 @@ cv::Mat Bg_sub::sub_algo(const cv::Mat& img_1, const cv::Mat& img_2){
 
     // Opening with same kernal size to remove small foreground artifacts
     Bg_sub::del_B_mats_t del_B_mats = comp_and_threshold(img_1, img_2, false);
-    uchar threshold = threshold_calc(del_B_mats.unthresh_bright, THRESH_DEV);
+    uchar threshold = threshold_calc(del_B_mats.unthresh_bright, Config::Tuning::THRESH_DEV);
 
     // Thersholding in another layer as threshold value needs to be dyn calc
     cv::Mat thresholded_bright;
@@ -214,7 +207,7 @@ cv::Mat Bg_sub::sub_algo(const cv::Mat& img_1, const cv::Mat& img_2){
     // Showing hist also
     cv::imshow("Created histogram", create_histogram(del_B_mats.unthresh_bright, threshold, 20, true));
 
-    return morph_opening(thresholded_bright, K_SIZE, K_SIZE);
+    return morph_opening(thresholded_bright, Config::Tuning::K_SIZE, Config::Tuning::K_SIZE);
 }
 
 

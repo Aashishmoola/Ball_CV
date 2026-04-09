@@ -63,6 +63,8 @@ set(SOURCES
     src/data_val_f/data_val_f.cpp
     src/met_calc/met_calc.cpp
     src/val/val.cpp
+    src/radar/radar.cpp
+    src/data_val_f/kf_2D.cpp
 )
 
 # ============================================================================

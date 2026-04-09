@@ -36,8 +36,8 @@
     1. Scen 1: When the function is not able to execute its intended function at all due to caller error; inter-module, in main where they interface with each other --> throw error
     2. Scen 2: When the function is not able to execute it intended function at all due to caller error; intra-module, within helper functions in the same module itseld --> Use assert
     3. Scen 3: When programme/function is not able to run as intended, partially fail, but programme can still continue --> boolean values to possibly stop control flow in layer & logging
-    4. Scen 4: When programme fails due to expected non-user reason, default catch all --> Error codes
-    5. Scen 5: When function only fails strict/semantic checks --> Logging to warn user
+    4. Scen 4: When programme fails due to expected non-user reason, default catch all --> Error codes.
+    5. Scen 5: When function only fails strict/semantic checks --> Logging to warn user.
 10. Use inline constepxr header file enclosed within a namespace for truly global constants that affect multiple modules and/or can be tuned.
 
 # Common errors

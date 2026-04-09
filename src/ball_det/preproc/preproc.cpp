@@ -24,7 +24,7 @@ cv::Mat Img_P::apply_blur(cv::Mat& img){
  */
 cv::Mat Img_P::apply_threshold(cv::Mat& img){
     cv::Mat binary_img;
-    cv::threshold(img, binary_img, Img_P::THRESHOLD_VAL, 255, cv::THRESH_OTSU);
+    cv::threshold(img, binary_img, Config::Tuning::THRESHOLD_VAL, 255, cv::THRESH_OTSU);
     return binary_img;
 };
 

@@ -1,13 +1,9 @@
 #include "h_transform.hpp"
-
-
-constexpr double MIN_BALL_AREA{3000.0};
-constexpr double MAX_BALL_AREA{10000.0};
-constexpr double MIN_CIRCULARITY{0.3}; // 1 is perfect, 0 is imperfect
+#include "../../helpers/tuning_params.hpp"
 
 
 
-void Trans::print_circle_cand(const Circle& circle_cand){
+void Trans::print_circle_cand(const Circles& circle_cand){
     if (circle_cand.empty()) {
         std::cout << "The are no circle candidates found in the hough transform" << '\n';
     }
@@ -29,12 +25,12 @@ cv::Scalar getColor(std::string color){
     else return cv::Scalar{0, 0, 0}; // Black
 } 
 
-void Trans::draw_circles(const Circle& circle_cand, cv::Mat& img, double text_font_scale){
+void Trans::draw_circles(const Circles& circle_cand, cv::Mat& img, double text_font_scale){
     for (const auto& circle: circle_cand){
-        cv::Point centre{cvRound(circle[0]), cvRound(circle[1])};
+        cv::Point centre(cvRound(circle[0]), cvRound(circle[1]));
         int r {cvRound(circle[2])};
 
-        cv::Point textPt{centre.x + r + 10, centre.y + r + 10};
+        cv::Point textPt(centre.x + r + 10, centre.y + r + 10);
         cv::String textStr = "(" + std::to_string(centre.x) + ", " + std::to_string(centre.y) + ")" + " ,R=" + std::to_string(r);
 
         cv::circle(img, centre, r, getColor("grey"), 1);
@@ -81,13 +77,13 @@ void find_circle_cand(const cv::Mat& img, Circles& out_circles){
         
         double circularity = (4 * M_PI * area) / (perimeter * perimeter);
 
-        if (circularity < MIN_CIRCULARITY){
+        if (circularity < Config::Tuning::MIN_CIRCULARITY){
             std::cout << "A contour has been eliminated due to low circularity." << '\n';
             continue;
         }
 
         std::cout << area << '\n';
-        if (area < MIN_BALL_AREA || area > MAX_BALL_AREA) {
+        if (area < Config::Tuning::MIN_BALL_AREA || area > Config::Tuning::MAX_BALL_AREA) {
             std::cout << "A ball artifact that is too small or large has been eliminated. " << '\n';
             continue;
         }

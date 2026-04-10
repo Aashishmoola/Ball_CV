@@ -1,0 +1,10 @@
+# Ignore vscode settings
+.vscode/
+
+# Ignore build artifacts
+build/
+*.d
+*.o
+
+# Ignore the python lib used for plotting
+plot/

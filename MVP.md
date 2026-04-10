@@ -26,10 +26,10 @@
 ## Status of each module/ General TODO: 
 ### Mark with TODO for what has to be done today.
 
-TODO: Should all constants be grouped together in the same file, to be tuned while those that are static unless architecture change remain in the modules
+// TODO Test kalman filter and understand as to why is it not working
+// TODO Test ball met calc to see why it does not seem to be working
 
 1. --> Have to improve
-    - TODO Implement circles to ball state conversion function (Convert to metric also after camera calibration)
     - Clean-up the helper functions; rename semantically
 3. --> Not necessary for actual implementation. Will only be used if data has to be steamed as a video instead of a jpeg.
 7. --> Have to link -> test

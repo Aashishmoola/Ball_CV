@@ -95,6 +95,3 @@ ball_disp_t Met_calc::cal_met(Ball_states &b_states)
     print_ball_max_disp(ball_disp);
     return ball_disp;
 }
-
-// TODO:: Threshold val cal, min and max ball_sizes is off for new test images
-// TODO:: Stuck in loop for ball det

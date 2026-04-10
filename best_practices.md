@@ -18,7 +18,7 @@
 - Trying to achive perfection in the first run
 - Do not try to start new projects and stick to working on the core idea itself
 - Track using a artifical ticketing system of tasks that are completed
-- Structure high level reln before implementation with actual code.
+- Structure high level reln before implementation with actual code, but do not obsess over it.
 - Set artificial deadlines
 
 # Best practices

@@ -1,5 +1,5 @@
 #pragma once
-#include "../helpers/image_state.hpp"
+#include "types/image_state.hpp"
 
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>

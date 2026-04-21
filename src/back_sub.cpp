@@ -1,6 +1,10 @@
 #include "back_sub.hpp"
-#include "../../val/val.hpp"
-#include "../../helpers/tuning_params.hpp"
+
+#include <iostream>
+#include <vector>
+
+#include "val.hpp"
+#include "config/tuning_params.hpp"
 
 #include <opencv2/imgproc.hpp>
 

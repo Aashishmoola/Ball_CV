@@ -28,10 +28,11 @@
 
 MVP 1: Done 
 Cleanup 1: 
-TODO Readup on how imports should be managed with this modular code structure.
-TODO Readup on error handling, iterate of the best_practices.md content.
-TODO:Consider per module imports in CMakeLists.txt.
-TODO Understang how testing is done in c++.
+DONE: Readup on how imports should be managed with this modular code structure.
+TODO: Fix imports (15 mins)
+TODO Readup on error handling, iterate of the best_practices.md content. (30 mins)
+TODO:Consider per module imports in CMakeLists.txt. (10 mins)
+TODO Understang how testing is done in c++. (30 mins)
 
 
 ## Trade Offs

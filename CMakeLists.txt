@@ -56,15 +56,15 @@ message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
 # Using a variable keeps the executable definition clean and easy to maintain.
 set(SOURCES
     src/main.cpp
-    src/ball_det/back_sub/back_sub.cpp
-    src/ball_det/preproc/preproc.cpp
-    src/ball_det/h_transform/h_transform.cpp
-    src/video_ex/video_ex.cpp
-    src/data_val_f/data_val_f.cpp
-    src/met_calc/met_calc.cpp
-    src/val/val.cpp
-    src/radar/radar.cpp
-    src/data_val_f/kf_2D.cpp
+    src/back_sub.cpp
+    src/preproc.cpp
+    src/h_transform.cpp
+    src/video_ex.cpp
+    src/data_val_f.cpp
+    src/met_calc.cpp
+    src/val.cpp
+    src/radar.cpp
+    src/kf_2D.cpp
 )
 
 # ============================================================================
@@ -81,6 +81,7 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 # Using target_include_directories (instead of the global include_directories)
 # scopes the includes to this target only — a CMake best practice.
 target_include_directories(${PROJECT_NAME} PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${OpenCV_INCLUDE_DIRS}
 )
 

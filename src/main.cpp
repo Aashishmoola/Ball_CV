@@ -4,14 +4,14 @@
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgcodecs.hpp>
 
-#include "ball_det/back_sub/back_sub.hpp"
-#include "ball_det/h_transform/h_transform.hpp"
-#include "ball_det/preproc/preproc.hpp"
-#include "data_val_f/data_val_f.hpp"
-#include "helpers/image_state.hpp"
-#include "met_calc/met_calc.hpp"
-#include "val/val.hpp"
-#include "video_ex/video_ex.hpp"
+#include "back_sub.hpp"
+#include "h_transform.hpp"
+#include "preproc.hpp"
+#include "data_val_f.hpp"
+#include "types/image_state.hpp"
+#include "met_calc.hpp"
+#include "val.hpp"
+#include "video_ex.hpp"
 
 namespace fs = std::filesystem;
 

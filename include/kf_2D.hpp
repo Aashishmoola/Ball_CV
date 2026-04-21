@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../helpers/ball_state.hpp"
-#include "../helpers/hardware_config.hpp"
-#include "../helpers/physics_consts.hpp"
-#include "../helpers/tuning_params.hpp"
-#include "../radar/radar.hpp"
+#include "types/ball_state.hpp"
+#include "config/hardware_config.hpp"
+#include "constants/physics_consts.hpp"
+#include "config/tuning_params.hpp"
+#include "radar.hpp"
 
 #include <opencv2/core.hpp>
 

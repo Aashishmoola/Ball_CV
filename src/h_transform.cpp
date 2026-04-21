@@ -1,5 +1,5 @@
 #include "h_transform.hpp"
-#include "../../helpers/tuning_params.hpp"
+#include "config/tuning_params.hpp"
 
 void Trans::print_circle_cand(const Circles &circle_cand)
 {

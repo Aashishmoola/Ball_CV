@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../helpers/ball_state.hpp"
-#include "../helpers/physics_consts.hpp"
-#include "../helpers/tuning_params.hpp"
-#include "../helpers/hardware_config.hpp"
+#include "types/ball_state.hpp"
+#include "constants/physics_consts.hpp"
+#include "config/tuning_params.hpp"
+#include "config/hardware_config.hpp"
 
 #include <iostream>
 #include <iomanip>

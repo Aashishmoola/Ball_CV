@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../helpers/ball_state.hpp"
-#include "../../helpers/image_state.hpp"
+#include "types/ball_state.hpp"
+#include "types/image_state.hpp"
 
 #include <opencv2/imgproc.hpp>
 #include <iostream>

@@ -26,19 +26,12 @@
 ## Status of each module/ General TODO: 
 ### Mark with TODO for what has to be done today.
 
-// TODO Test kalman filter and understand as to why is it not working
-// TODO Test ball met calc to see why it does not seem to be working
-
-1. --> Have to improve
-    - Clean-up the helper functions; rename semantically
-3. --> Not necessary for actual implementation. Will only be used if data has to be steamed as a video instead of a jpeg.
-7. --> Have to link -> test
-    - Implement main loop itself
-    - Return velocity estimations (full state)
-    - Plot filter with matplot++ to see how many frames it takes to converge.
-8. --> Have to link -> test
-    - TODO Remove convert to metric ball option.
-
+MVP 1: Done 
+Cleanup 1: 
+TODO Readup on how imports should be managed with this modular code structure.
+TODO Readup on error handling, iterate of the best_practices.md content.
+TODO:Consider per module imports in CMakeLists.txt.
+TODO Understang how testing is done in c++.
 
 
 ## Trade Offs

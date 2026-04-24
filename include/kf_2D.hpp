@@ -1,11 +1,5 @@
 #pragma once
 
-#include "types/ball_state.hpp"
-#include "config/hardware_config.hpp"
-#include "constants/physics_consts.hpp"
-#include "config/tuning_params.hpp"
-#include "radar.hpp"
-
 #include <opencv2/core.hpp>
 
 // FIXME Check is process noise it significant to model drag that is consistent

@@ -29,10 +29,22 @@
 MVP 1: Done 
 Cleanup 1: 
 DONE: Readup on how imports should be managed with this modular code structure.
-TODO: Fix imports (15 mins)
+TODO Some types, stdlib seem to be leaking from the header file to th associated cpp file 
 TODO Readup on error handling, iterate of the best_practices.md content. (30 mins)
-TODO:Consider per module imports in CMakeLists.txt. (10 mins)
+TODO Consider per module imports in CMakeLists.txt. (10 mins)
 TODO Understang how testing is done in c++. (30 mins)
+
+
+Some production level improvemnts to the code:
+1. Make programme so it can be portable (run in a external environment)
+2. Error handling and input and output boundaries
+3. Use a standardised method of logging
+4. Start creating tests for each single moudule an then a full end-to-end regression test
+5. Implement necessary compile options and sanitizer build
+6. FIX FIXME's and dead branch in kf_2D
+7. Reconfigure to naming convetions using claude, implement going forward
+8. Create a github action workflow to build and test before pushing to github
+9. Run a stress test metrics and see if certain efficiency parameters can be improved.
 
 
 ## Trade Offs

@@ -1,6 +1,10 @@
 #pragma once
 
-#include "kf_2D.hpp"
+#include <vector>
+
+#include <opencv2/core.hpp>
+
+#include "types/ball_state.hpp"
 
 using Ball_pos = cv::Matx21d;
 using Balls_pos = std::vector<Ball_pos>;

@@ -1,13 +1,7 @@
 #pragma once
 #include "types/image_state.hpp"
 
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
-
-#include <vector>
-#include <iostream>
-#include <cctype>
-#include <string>
+#include <opencv2/core.hpp>
 
 namespace Val
 {

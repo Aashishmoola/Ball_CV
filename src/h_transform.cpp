@@ -1,5 +1,12 @@
-#include "h_transform.hpp"
+#include "../include/h_transform.hpp"
+
+#include <iostream>
+
+#include <opencv2/imgproc.hpp>
+
 #include "config/tuning_params.hpp"
+#include "types/ball_state.hpp"
+#include "types/image_state.hpp"
 
 void Trans::print_circle_cand(const Circles &circle_cand)
 {

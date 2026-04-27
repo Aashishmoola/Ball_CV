@@ -1,6 +1,8 @@
-#include "preproc.hpp"
+#include "../include/preproc.hpp"
 
 #include <iostream>
+
+#include <opencv2/imgproc.hpp>
 
 // cv::Mat --> n-dimm arr that stores many types of data (images, vectors, histograms)
 

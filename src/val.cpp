@@ -1,6 +1,14 @@
-#include "val.hpp"
+#include "../include/val.hpp"
 
+#include <vector>
+#include <iostream>
+#include <cctype>
+#include <string>
 #include <filesystem>
+
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
+
 namespace fs = std::filesystem;
 
 std::vector<std::string> VALID_FILE_EXT{".jpg", ".png", ".jpeg"}; // path.extenstion().string() retuns ext with the dot included.

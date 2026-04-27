@@ -1,11 +1,9 @@
 #pragma once
 
+#include <opencv2/core.hpp>
+
 #include "types/ball_state.hpp"
 #include "types/image_state.hpp"
-
-#include <opencv2/imgproc.hpp>
-#include <iostream>
-#include <vector>
 
 namespace Trans
 {

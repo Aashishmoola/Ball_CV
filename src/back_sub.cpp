@@ -3,10 +3,11 @@
 #include <iostream>
 #include <vector>
 
+#include <opencv2/imgproc.hpp>
+#include <opencv2/highgui.hpp>
+
 #include "val.hpp"
 #include "config/tuning_params.hpp"
-
-#include <opencv2/imgproc.hpp>
 
 // TODO: Replace Bg_pt with cv::Point
 // TODO: Seperate validation into a different layer. Validation for these function types.

@@ -1,6 +1,6 @@
-## Design Thinking, shifting how you perceive, approach and breakdown the problem.
+# Design Thinking, shifting how you perceive, approach and breakdown the problem.
 
-# Mental Models and Principles
+## Mental Models and Principles
 - First Principles Thinking: Breaking complex problems down to their most basic, fundamental truths to rebuild innovative solutions. Asking why iteratively.
 - Inversion: Thinking about a problem in reverse. Instead of asking how to succeed, ask, "How could this system fail?" or "What could go wrong?" to identify risks early.
 - Second-Order Thinking: Considering the consequences of consequences. It involves looking beyond the immediate impact of a technical decision (e.g., adding a cache) to understand long-term effects (e.g., cache invalidation issues).
@@ -8,12 +8,12 @@
 - Pareto Principle (80/20 Rule): Identifying the 20% of code that provides 80% of the value or causes 80% of the bugs, allowing for prioritized effort.
 - Occam's Razor: Choosing the simplest solution with the fewest assumptions when faced with multiple design choices. 
 
-# Process and Decision Frameworks
+## Process and Decision Frameworks
 - Model-Based Systems Engineering (MBSE): Uses visual models rather than long written documents to manage complex systems, often utilizing languages like SysML. (Matlab Simulink)
 - Failure Modes and Effects Analysis (FMEA): A step-by-step method to figure out what could go wrong, its severity, and its likelihood, used for robust design in critical systems.
 - Type 1 vs. Type 2 Decisions (One-Way/Two-Way Doors): Classifying decisions based on reversibility. Irreversible (Type 1) decisions require deep thought, while reversible (Type 2) decisions favor speed
 
-# Common pitfalls when starting a large project
+## Common pitfalls when starting a large project
 - Not following a MVP and iterative structure for testing of ideas
 - Trying to achive perfection in the first run
 - Do not try to start new projects and stick to working on the core idea itself
@@ -21,7 +21,7 @@
 - Structure high level reln before implementation with actual code, but do not obsess over it.
 - Set artificial deadlines
 
-# Best practices
+## Best practices
 1. The hpp file must only contain declerations. The cpp file should contain implementation specific global consts. 
     - Use constexpr if possible. 
     - Seperate dev and prod constants with comments.
@@ -40,11 +40,18 @@
     5. Scen 5: When function only fails strict/semantic checks --> Logging to warn user.
 10. Use inline constepxr header file enclosed within a namespace for truly global constants that affect multiple modules and/or can be tuned.
 
-# Common errors
+## Naming Conventions
+- Abbreviations should be obvious, if not capitalise. RPG (Role Playing Game)
+- file_names, variable_names, Class/Struct member names --> Typed in snake_case (No - capitalisation)
+- function_names --> PascalCase(No Capitalisation)
+- Classes, Namespaces --> PascalCase(Capitalisation)
+- Constants (Global, namespaced scoped, enum, class static) --> PascalCase (Prefixed with lowercase 'k')
+
+## Common errors
 1. All relative paths used are relative to the root of the build dir as there is where the bin file is built.
 
 
-# Specific guidelines for this project
+## Specific guidelines for this project
 - Make sure to upload into git after each iteration.
 - Make sure to use claude CLI with claude getting updated context to MVP.md to answer specifically to context. 
 - cv::Mat optimises copies by only copying headers of the matrix instead of entire matrix --> works like a shared pointer

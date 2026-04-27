@@ -1,7 +1,8 @@
 #pragma once
 
-#include <opencv2/core.hpp>
 #include <vector>
+
+#include <opencv2/core.hpp>
 
 // position and velocity of the ball in pixels, velocity is calc in the kalman filter itself
 struct ball_state_t

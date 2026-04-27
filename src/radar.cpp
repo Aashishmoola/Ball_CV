@@ -1,4 +1,6 @@
-#include "radar.hpp"
+#include "../include/radar.hpp"
+
+#include <cmath>
 
 double Radar::get_Z_cam(double Z_r, double x_offset, double y_offset)
 {

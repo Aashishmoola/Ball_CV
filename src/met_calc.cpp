@@ -1,4 +1,12 @@
-#include "met_calc.hpp"
+#include "../include/met_calc.hpp"
+
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+#include "constants/physics_consts.hpp"
+#include "config/tuning_params.hpp"
+#include "config/hardware_config.hpp"
 
 /*  Calc drag coefficent with least sqaures.  k = Σ(-a_i * v_i²) / Σ(v_i⁴), where k >= 0; k ~ K/mass
     Ensure that signs are retained as per convention that upwards and right is positive
@@ -62,7 +70,7 @@ double get_drag_comp(const Ball_states &ball_states, double dt)
  * @param dt Being negative will extrapolate in -ve x direction
  */
 
-ball_disp_t get_max_disp(const Ball_states &b_states, double m, double k, double dt, double y_offset)
+ball_disp_t get_max_disp(const Ball_states &b_states, double k, double dt, double y_offset)
 {
     auto &b = b_states.back();
 
@@ -112,7 +120,7 @@ ball_disp_t Met_calc::cal_met(Ball_states &b_states)
 {
     double k = get_drag_comp(b_states, Config::Hardware::T_STEP_FRAME);
 
-    auto ball_disp = get_max_disp(b_states, Config::Physics::BALL_MASS, k, Config::Physics::T_STEP, Config::Hardware::Y_OFFSET);
+    auto ball_disp = get_max_disp(b_states, k, Config::Tuning::T_STEP, Config::Hardware::Y_OFFSET);
     print_ball_max_disp(ball_disp);
     return ball_disp;
 }

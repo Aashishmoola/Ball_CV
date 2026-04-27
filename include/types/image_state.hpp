@@ -1,10 +1,10 @@
 #pragma once
 
-#include <opencv2/core.hpp>
-
 #include <vector>
 #include <utility>
 #include <string>
+
+#include <opencv2/core.hpp>
 
 struct ball_det_count_t
 {

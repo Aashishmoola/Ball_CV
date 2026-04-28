@@ -201,29 +201,29 @@ src/h_transform.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/h_transform.cpp.s
 .PHONY : src/h_transform.cpp.s
 
-src/kf_2D.o: src/kf_2D.cpp.o
-.PHONY : src/kf_2D.o
+src/kf_2d.o: src/kf_2d.cpp.o
+.PHONY : src/kf_2d.o
 
 # target to build an object file
-src/kf_2D.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/kf_2D.cpp.o
-.PHONY : src/kf_2D.cpp.o
+src/kf_2d.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/kf_2d.cpp.o
+.PHONY : src/kf_2d.cpp.o
 
-src/kf_2D.i: src/kf_2D.cpp.i
-.PHONY : src/kf_2D.i
+src/kf_2d.i: src/kf_2d.cpp.i
+.PHONY : src/kf_2d.i
 
 # target to preprocess a source file
-src/kf_2D.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/kf_2D.cpp.i
-.PHONY : src/kf_2D.cpp.i
+src/kf_2d.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/kf_2d.cpp.i
+.PHONY : src/kf_2d.cpp.i
 
-src/kf_2D.s: src/kf_2D.cpp.s
-.PHONY : src/kf_2D.s
+src/kf_2d.s: src/kf_2d.cpp.s
+.PHONY : src/kf_2d.s
 
 # target to generate assembly for a file
-src/kf_2D.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/kf_2D.cpp.s
-.PHONY : src/kf_2D.cpp.s
+src/kf_2d.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ball_cv.dir/build.make CMakeFiles/ball_cv.dir/src/kf_2d.cpp.s
+.PHONY : src/kf_2d.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -387,9 +387,9 @@ help:
 	@echo "... src/h_transform.o"
 	@echo "... src/h_transform.i"
 	@echo "... src/h_transform.s"
-	@echo "... src/kf_2D.o"
-	@echo "... src/kf_2D.i"
-	@echo "... src/kf_2D.s"
+	@echo "... src/kf_2d.o"
+	@echo "... src/kf_2d.i"
+	@echo "... src/kf_2d.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

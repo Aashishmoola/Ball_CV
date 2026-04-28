@@ -6,7 +6,7 @@
 
 #include <opencv2/core.hpp>
 
-struct ball_det_count_t
+struct BallDetCount
 {
     int cir;
     int area;

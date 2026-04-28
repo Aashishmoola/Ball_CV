@@ -1,13 +1,15 @@
+#pragma once
+
 #include <opencv2/core.hpp>
 
-namespace Bg_sub
+namespace BgSub
 {
-    struct pt_t
+    struct Pt
     {
         int x;
         int y;
     };
-    struct del_B_mats_t
+    struct DelBMats
     {
         cv::Mat bright;
         cv::Mat shadow;
@@ -15,14 +17,14 @@ namespace Bg_sub
         cv::Mat unthresh_bright;
     };
 
-    enum class BIN_P
+    enum class BinP
     {
-        DIALATION,
-        EROSION,
+        kDialation,
+        kErosion,
     };
 
-    uchar threshold_calc(const cv::Mat img, double deviation);
-    cv::Mat sub_algo(const cv::Mat &img_in_1, const cv::Mat &img_in_2);
-    del_B_mats_t comp_and_threshold(const cv::Mat &img_1, const cv::Mat &img_2, bool should_threshold, uchar threshold = 0);
-    cv::Mat create_histogram(const cv::Mat &img, uchar threshold_indicator, int mask_size = 0, bool should_print = false);
+    uchar thresholdCalc(const cv::Mat img, double deviation);
+    cv::Mat subAlgo(const cv::Mat &img_in_1, const cv::Mat &img_in_2);
+    DelBMats compAndThreshold(const cv::Mat &img_1, const cv::Mat &img_2, bool should_threshold, uchar threshold = 0);
+    cv::Mat createHistogram(const cv::Mat &img, uchar threshold_indicator, int mask_size = 0, bool should_print = false);
 }

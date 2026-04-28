@@ -6,13 +6,13 @@
 
 #include "types/ball_state.hpp"
 
-using Ball_pos = cv::Matx21d;
-using Balls_pos = std::vector<Ball_pos>;
+using BallPos = cv::Matx21d;
+using BallsPos = std::vector<BallPos>;
 
-namespace Data_val_f
+namespace DataValF
 {
-    void circles_to_balls_pos(const Circles &circles, Balls_pos &balls_pos);
-    void balls_pos_to_state(const Balls_pos &balls_pos, Ball_states &states);
-    void run_k_filter(Balls_pos &balls_pos);
+    void circlesToBallsPos(const Circles &circles, BallsPos &balls_pos);
+    void ballsPosToState(const BallsPos &balls_pos, BallStates &states);
+    void runKFilter(BallsPos &balls_pos);
 
 }

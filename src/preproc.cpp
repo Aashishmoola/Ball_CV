@@ -6,7 +6,7 @@
 
 // cv::Mat --> n-dimm arr that stores many types of data (images, vectors, histograms)
 
-cv::Mat Img_P::convert_grayscale(cv::Mat &img)
+cv::Mat ImgPreproc::convertGrayscale(cv::Mat &img)
 {
     cv::Mat grayed_img;
     cv::cvtColor(img, grayed_img, cv::COLOR_BGR2GRAY);
@@ -16,7 +16,7 @@ cv::Mat Img_P::convert_grayscale(cv::Mat &img)
     return grayed_img;
 };
 
-cv::Mat Img_P::apply_blur(cv::Mat &img)
+cv::Mat ImgPreproc::applyBlur(cv::Mat &img)
 {
     cv::Mat blurred_img;
     cv::GaussianBlur(img, blurred_img, cv::Size(3, 3), 0);

@@ -16,24 +16,24 @@
 
 namespace fs = std::filesystem;
 
-const std::string IMG_LIB_PATH{"../images/test_sample_1"};
-const std::string CSV_OUTPUT_PATH{"../csv_out"};
+const std::string kImgLibPath{"../images/test_sample_1"};
+const std::string kCsvOutputPath{"../csv_out"};
 
-void print_ball_det(const ball_det_count_t &count)
+void printBallDet(const BallDetCount &count)
 {
   std::cout << "Successful det: " << count.success
             << "  Failed Det: " << count.fail << '\n';
 }
 
-std::string proc_img_name(std::string A, std::string B)
+std::string procImgName(std::string A, std::string B)
 {
   int start_i = B.rfind("_");
   int end_i = B.size() - 1;
   return A.append(B.substr(start_i, end_i - start_i + 1));
 }
 
-void dump_ball_path_csv(const Balls_pos &balls_pos, const std::string &dir_path,
-                        const std::string &filename)
+void dumpBallPathCsv(const BallsPos &balls_pos, const std::string &dir_path,
+                     const std::string &filename)
 {
   std::ofstream f(dir_path + '/' + filename + ".csv");
   f << "x,y\n";
@@ -43,14 +43,14 @@ void dump_ball_path_csv(const Balls_pos &balls_pos, const std::string &dir_path,
   }
 }
 
-void test_pre_proc()
+void testPreProc()
 {
   Images raw_images;
-  Val::read_img_files(raw_images, IMG_LIB_PATH);
+  Val::readImgFiles(raw_images, kImgLibPath);
 
   for (auto &[name, image] : raw_images)
   {
-    image = Img_P::convert_grayscale(image);
+    image = ImgPreproc::convertGrayscale(image);
   }
   Images &grayed_images = raw_images;
 
@@ -60,8 +60,8 @@ void test_pre_proc()
     auto [name_1, image_1] = *it;
     auto [name_2, image_2] = *(it + 1);
 
-    Image img_map = std::make_pair(proc_img_name(name_1, name_2),
-                                   Bg_sub::sub_algo(image_1, image_2));
+    Image img_map = std::make_pair(procImgName(name_1, name_2),
+                                   BgSub::subAlgo(image_1, image_2));
 
     proc_images.push_back(img_map);
   }
@@ -77,14 +77,14 @@ void test_pre_proc()
   cv::waitKey(0);
 }
 
-void test_ball_det()
+void testBallDet()
 {
   Images raw_images;
-  Val::read_img_files(raw_images, IMG_LIB_PATH);
+  Val::readImgFiles(raw_images, kImgLibPath);
 
   for (auto &[name, image] : raw_images)
   {
-    image = Img_P::convert_grayscale(image);
+    image = ImgPreproc::convertGrayscale(image);
   }
   Images &grayed_images = raw_images;
 
@@ -94,35 +94,35 @@ void test_ball_det()
     auto [name_1, image_1] = *it;
     auto [name_2, image_2] = *(it + 1);
 
-    Image img_map = std::make_pair(proc_img_name(name_1, name_2),
-                                   Bg_sub::sub_algo(image_1, image_2));
+    Image img_map = std::make_pair(procImgName(name_1, name_2),
+                                   BgSub::subAlgo(image_1, image_2));
 
     proc_images.push_back(img_map);
   }
 
   // Runs hough transform and print image before and after circle drawn
   Circles circles;
-  ball_det_count_t count;
+  BallDetCount count;
   for (auto &[name, image] : proc_images)
   {
-    Trans::find_ball_cand(image, circles, count);
+    Trans::findBallCand(image, circles, count);
     cv::imshow(name + "after_ball_det", image);
 
     std::cout << "Showing image: " << name << '\n';
   }
 
-  print_ball_det(count);
+  printBallDet(count);
   cv::waitKey(0);
 }
 
-void test_main()
+void testMain()
 {
   Images raw_images;
-  Val::read_img_files(raw_images, IMG_LIB_PATH);
+  Val::readImgFiles(raw_images, kImgLibPath);
 
   for (auto &[name, image] : raw_images)
   {
-    image = Img_P::convert_grayscale(image);
+    image = ImgPreproc::convertGrayscale(image);
   }
   Images &grayed_images = raw_images;
 
@@ -132,44 +132,44 @@ void test_main()
     auto [name_1, image_1] = *it;
     auto [name_2, image_2] = *(it + 1);
 
-    Image img_map = std::make_pair(proc_img_name(name_1, name_2),
-                                   Bg_sub::sub_algo(image_1, image_2));
+    Image img_map = std::make_pair(procImgName(name_1, name_2),
+                                   BgSub::subAlgo(image_1, image_2));
 
     proc_images.push_back(img_map);
   }
 
   // Runs hough transform and print image before and after circle drawn
-  ball_det_count_t count;
+  BallDetCount count;
   Circles circles;
   for (auto &[name, image] : proc_images)
   {
-    Trans::find_ball_cand(image, circles, count);
+    Trans::findBallCand(image, circles, count);
     // cv::imshow(name + "after_ball_det", image);
 
     // std::cout << "Showing image: " << name << '\n';
   }
 
-  print_ball_det(count);
+  printBallDet(count);
 
-  Balls_pos balls_pos;
-  Data_val_f::circles_to_balls_pos(circles, balls_pos);
-  dump_ball_path_csv(balls_pos, CSV_OUTPUT_PATH, "before_kf");
+  BallsPos balls_pos;
+  DataValF::circlesToBallsPos(circles, balls_pos);
+  dumpBallPathCsv(balls_pos, kCsvOutputPath, "before_kf");
 
-  Data_val_f::run_k_filter(balls_pos);
+  DataValF::runKFilter(balls_pos);
 
-  dump_ball_path_csv(balls_pos, CSV_OUTPUT_PATH, "after_kf");
+  dumpBallPathCsv(balls_pos, kCsvOutputPath, "after_kf");
 
-  Ball_states ball_states;
-  Data_val_f::balls_pos_to_state(balls_pos, ball_states);
+  BallStates ball_states;
+  DataValF::ballsPosToState(balls_pos, ball_states);
 
   // Calc the ball metrics, max disp from the ball centre
-  ball_disp_t max_disp = Met_calc::cal_met(ball_states);
+  BallDisp max_disp = MetCalc::calMet(ball_states);
 
   // cv::waitKey(0);
 }
 
 int main()
 {
-  test_main();
+  testMain();
   return 0;
 }

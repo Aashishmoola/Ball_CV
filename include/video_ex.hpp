@@ -2,6 +2,7 @@
 
 #include <iostream>
 
-namespace Vid_ex{
-    void process_frames(const std::string& filename);
+namespace VidEx
+{
+    void processFrames(const std::string &filename);
 }

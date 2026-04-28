@@ -3,11 +3,11 @@
 #include <opencv2/core.hpp>
 
 // FIXME Check is process noise it significant to model drag that is consistent
-class K_fil_2D
+class KFil2D
 {
 public:
     // Process noise and measued noise needs to be initialised as a high value before model can correct itself
-    K_fil_2D(double dt, double process_noise, double meas_noise_x, double meas_noise_y, double g);
+    KFil2D(double dt, double process_noise, double meas_noise_x, double meas_noise_y, double g);
     cv::Matx21d predict();                    // Check types
     cv::Matx21d update(const cv::Matx21d &z); // Check types
 

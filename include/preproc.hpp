@@ -4,10 +4,10 @@
 
 #include "config/tuning_params.hpp"
 
-namespace Img_P
+namespace ImgPreproc
 {
-    cv::Mat convert_grayscale(cv::Mat &);
-    cv::Mat apply_blur(cv::Mat &);
-    cv::Mat apply_threshold(cv::Mat &);
+    cv::Mat convertGrayscale(cv::Mat &);
+    cv::Mat applyBlur(cv::Mat &);
+    cv::Mat applyThreshold(cv::Mat &);
 
 }

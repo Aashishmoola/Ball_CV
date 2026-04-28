@@ -13,7 +13,7 @@
     k is a constant so it should be the same for both the x and y directions.
 */
 
-double get_drag_comp(const Ball_states &ball_states, double dt)
+double getDragComp(const BallStates &ball_states, double dt)
 {
     double numerator_sum{0};   // Σ(-a_i * v_i²)
     double denominator_sum{0}; // Σ(v_i⁴)
@@ -31,10 +31,10 @@ double get_drag_comp(const Ball_states &ball_states, double dt)
             continue;
         }
 
-        bool is_curr_Pos = (curr_b.x_v > 0);
-        bool is_next_Pos = (next_b.x_v > 0);
+        bool is_curr_pos = (curr_b.x_v > 0);
+        bool is_next_pos = (next_b.x_v > 0);
 
-        if (is_curr_Pos != is_next_Pos)
+        if (is_curr_pos != is_next_pos)
         {
             {
                 throw std::runtime_error("Error: Ball state measurement is indicating ball is moving in opp directions between frames");
@@ -42,7 +42,7 @@ double get_drag_comp(const Ball_states &ball_states, double dt)
         }
 
         double a_x = (next_b.x_v - curr_b.x_v) / dt;
-        // double a_y = (next_b.y_v - curr_b.y_v) / dt - Config::Physics::G_FIELD_CONST;
+        // double a_y = (next_b.y_v - curr_b.y_v) / dt - Config::Physics::kGFieldConst;
 
         // Using current v_x
         double vx_2 = (curr_b.x_v * curr_b.x_v);
@@ -50,7 +50,7 @@ double get_drag_comp(const Ball_states &ball_states, double dt)
         double vx_4 = vx_2 * vx_2;
 
         // Σ(-a_i * v_i²), TODO: Error here.
-        numerator_sum += (-a_x * (is_curr_Pos ? 1 : -1)) * vx_2;
+        numerator_sum += (-a_x * (is_curr_pos ? 1 : -1)) * vx_2;
         denominator_sum += vx_4;
     }
 
@@ -70,7 +70,7 @@ double get_drag_comp(const Ball_states &ball_states, double dt)
  * @param dt Being negative will extrapolate in -ve x direction
  */
 
-ball_disp_t get_max_disp(const Ball_states &b_states, double k, double dt, double y_offset)
+BallDisp getMaxDisp(const BallStates &b_states, double k, double dt, double y_offset)
 {
     auto &b = b_states.back();
 
@@ -93,7 +93,7 @@ ball_disp_t get_max_disp(const Ball_states &b_states, double k, double dt, doubl
         v_x = v_x + a_x * dt;
         disp_x = disp_x + v_x * dt;
 
-        double a_y = -1 / k * v * v_y - Config::Physics::G_FIELD_CONST;
+        double a_y = -1 / k * v * v_y - Config::Physics::kGFieldConst;
         v_y = v_y + a_y * dt;
         disp_y = disp_y + v_y * dt;
 
@@ -103,10 +103,10 @@ ball_disp_t get_max_disp(const Ball_states &b_states, double k, double dt, doubl
     }
     std::cout << "Total Flight Duration" << static_cast<int>(t_total);
 
-    return ball_disp_t{disp_x, max_disp_y};
+    return BallDisp{disp_x, max_disp_y};
 }
 
-void print_ball_max_disp(const ball_disp_t &b)
+void printBallMaxDisp(const BallDisp &b)
 {
     std::cout << "Ball Displacement: Max X Distance: " << b.x << "m"
               << "Max Y Distance: " << b.y << "m" << '\n';
@@ -116,11 +116,11 @@ void print_ball_max_disp(const ball_disp_t &b)
  * @brief Gets the max displacemnt of the ball form last state of the ball (centre of ball) captured.
  *
  */
-ball_disp_t Met_calc::cal_met(Ball_states &b_states)
+BallDisp MetCalc::calMet(BallStates &b_states)
 {
-    double k = get_drag_comp(b_states, Config::Hardware::T_STEP_FRAME);
+    double k = getDragComp(b_states, Config::Hardware::kTStepFrame);
 
-    auto ball_disp = get_max_disp(b_states, k, Config::Tuning::T_STEP, Config::Hardware::Y_OFFSET);
-    print_ball_max_disp(ball_disp);
+    auto ball_disp = getMaxDisp(b_states, k, Config::Tuning::kTStep, Config::Hardware::kYOffset);
+    printBallMaxDisp(ball_disp);
     return ball_disp;
 }

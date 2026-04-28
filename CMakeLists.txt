@@ -64,7 +64,7 @@ set(SOURCES
     src/met_calc.cpp
     src/val.cpp
     src/radar.cpp
-    src/kf_2D.cpp
+    src/kf_2d.cpp
 )
 
 # ============================================================================

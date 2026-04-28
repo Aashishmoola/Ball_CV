@@ -12,7 +12,7 @@ namespace fs = std::filesystem;
  * @param filepath filepath can be relative or absolute?
  * @note Timestamp labelled in frame --> Precision 6 digits after dec pt.
  */
-void Vid_ex::process_frames(const std::string &filepath)
+void VidEx::processFrames(const std::string &filepath)
 {
 
     fs::path vid_path(filepath);
@@ -21,8 +21,8 @@ void Vid_ex::process_frames(const std::string &filepath)
 
     auto vid_cap = cv::VideoCapture(vid_path.string());
 
-    // frame_idx / FPS * 1000 --> Time Elapsed in ms, Alt in case of frame drift
-    const auto FPS = vid_cap.get(cv::CAP_PROP_FPS);
+    // frame_idx / fps * 1000 --> Time Elapsed in ms, Alt in case of frame drift
+    const auto fps = vid_cap.get(cv::CAP_PROP_FPS);
 
     int frame_idx{0};
     while (true)
@@ -39,7 +39,7 @@ void Vid_ex::process_frames(const std::string &filepath)
         frame_idx++;
     }
 
-    const auto timestamp_ms_c = frame_idx / FPS * 1000;
+    const auto timestamp_ms_c = frame_idx / fps * 1000;
 
     // Temp Printing of time elaped for debugging purposes
     std::cout << "Frame: " << frame_idx

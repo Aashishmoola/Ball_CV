@@ -2,7 +2,7 @@
 
 #include "../include/types/ball_state.hpp"
 
-#include "../include/kf_2D.hpp"
+#include "../include/kf_2d.hpp"
 #include "../include/config/hardware_config.hpp"
 #include "../include/config/tuning_params.hpp"
 #include "../include/constants/physics_consts.hpp"
@@ -18,32 +18,32 @@
 /// @param x_val from top-left of camera frame in px
 /// @param y_val from top-right of camera frame in px
 /// @return pos of centre of ball from centre of frame in m
-Ball_pos px_to_m_cam(double x_px, double y_px)
+BallPos pxToMCam(double x_px, double y_px)
 {
     double z_cam =
-        Radar::get_Z_cam(Config::Hardware::Z_M, Config::Hardware::X_R_OFFSET,
-                         Config::Hardware::Y_R_OFFSET);
+        Radar::getZCam(Config::Hardware::kZM, Config::Hardware::kXROffset,
+                       Config::Hardware::kYROffset);
 
-    double scale_x = z_cam / Config::Hardware::FX_PX;
-    double scale_y = z_cam / Config::Hardware::FY_PX;
+    double scale_x = z_cam / Config::Hardware::kFxPx;
+    double scale_y = z_cam / Config::Hardware::kFyPx;
 
-    double x_m = (x_px - Config::Hardware::X_IMG_PX / 2) * scale_x;
-    double y_m = (Config::Hardware::Y_IMG_PX / 2 - y_px) * scale_y +
-                 Config::Hardware::Y_OFFSET;
+    double x_m = (x_px - Config::Hardware::kXImgPx / 2) * scale_x;
+    double y_m = (Config::Hardware::kYImgPx / 2 - y_px) * scale_y +
+                 Config::Hardware::kYOffset;
 
-    Ball_pos pos(x_m, y_m);
+    BallPos pos(x_m, y_m);
     return pos;
 }
 
-void Data_val_f::circles_to_balls_pos(const Circles &circles, Balls_pos &balls_pos)
+void DataValF::circlesToBallsPos(const Circles &circles, BallsPos &balls_pos)
 {
     for (const auto &circle : circles)
     {
-        balls_pos.push_back(px_to_m_cam(circle[0], circle[1]));
+        balls_pos.push_back(pxToMCam(circle[0], circle[1]));
     }
 }
 
-void Data_val_f::balls_pos_to_state(const Balls_pos &balls_pos, Ball_states &states)
+void DataValF::ballsPosToState(const BallsPos &balls_pos, BallStates &states)
 {
     if (balls_pos.size() < 2)
         throw std::invalid_argument(" Too few ball pos mat for conversion, must be >2");
@@ -52,23 +52,23 @@ void Data_val_f::balls_pos_to_state(const Balls_pos &balls_pos, Ball_states &sta
         auto curr = *it;
         auto next = *(it + 1);
 
-        auto new_v_x = (next(0, 0) - curr(0, 0)) / Config::Hardware::T_STEP_FRAME;
-        auto new_v_y = (next(1, 0) - curr(1, 0)) / Config::Hardware::T_STEP_FRAME;
+        auto new_v_x = (next(0, 0) - curr(0, 0)) / Config::Hardware::kTStepFrame;
+        auto new_v_y = (next(1, 0) - curr(1, 0)) / Config::Hardware::kTStepFrame;
 
         // Access with col, row syntax for 2D matrixes
-        ball_state_t new_state{next(0, 0), next(1, 0), new_v_x, new_v_y};
+        BallState new_state{next(0, 0), next(1, 0), new_v_x, new_v_y};
         states.push_back(new_state);
     }
 }
 
-void Data_val_f::run_k_filter(Balls_pos &balls_pos)
+void DataValF::runKFilter(BallsPos &balls_pos)
 {
-    K_fil_2D kf{Config::Hardware::T_STEP_FRAME, Config::Tuning::P_NOISE, Config::Tuning::M_NOISE,
-                Config::Tuning::M_NOISE, Config::Physics::G_FIELD_CONST};
+    KFil2D kf{Config::Hardware::kTStepFrame, Config::Tuning::kPNoise, Config::Tuning::kMNoise,
+              Config::Tuning::kMNoise, Config::Physics::kGFieldConst};
 
     for (auto &pos : balls_pos)
     {
-        Ball_pos predict_pos = kf.predict();
+        BallPos predict_pos = kf.predict();
         // TODO: Should be a check if the ball has been detected and kalman filter
         // has converged
         if (true)

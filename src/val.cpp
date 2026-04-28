@@ -11,9 +11,9 @@
 
 namespace fs = std::filesystem;
 
-std::vector<std::string> VALID_FILE_EXT{".jpg", ".png", ".jpeg"}; // path.extenstion().string() retuns ext with the dot included.
+const std::vector<std::string> kValidFileExt{".jpg", ".png", ".jpeg"}; // path.extenstion().string() retuns ext with the dot included.
 
-int extract_first_num(const std::string &f_name)
+int extractFirstNum(const std::string &f_name)
 {
     auto it = std::find_if(f_name.begin(), f_name.end(), isdigit);
     if (it == f_name.end())
@@ -24,19 +24,19 @@ int extract_first_num(const std::string &f_name)
 /// @brief Callback func for sort
 /// @return boolean for a < b
 /// @note filenames with no num will propogate to the top
-bool compare_by_fnum(const Image &a, const Image &b)
+bool compareByFnum(const Image &a, const Image &b)
 {
-    return extract_first_num(a.first) < extract_first_num(b.first);
+    return extractFirstNum(a.first) < extractFirstNum(b.first);
 }
 
-bool is_img_ext_valid(const std::vector<std::string> &vec, std::string val)
+bool findInVec(const std::vector<std::string> &vec, std::string val)
 {
     auto it = std::find(vec.begin(), vec.end(), val);
     return it != vec.end();
 }
 
 // Used for inter module check --> throw err
-void Val::validate_images(const cv::Mat &img_1, const cv::Mat &img_2)
+void Val::validateImages(const cv::Mat &img_1, const cv::Mat &img_2)
 {
     /*
         Type --> No. of channels (in each pixel) (1 --> greyscale, 3 --> BGR)
@@ -48,7 +48,7 @@ void Val::validate_images(const cv::Mat &img_1, const cv::Mat &img_2)
     }
 }
 
-bool Val::read_img_files(Images &images, const std::string &lib_path)
+bool Val::readImgFiles(Images &images, const std::string &lib_path)
 {
     // AUtomatically converts string to path obj
     if (!fs::exists(lib_path))
@@ -68,7 +68,7 @@ bool Val::read_img_files(Images &images, const std::string &lib_path)
             continue;
         }
 
-        if (!is_img_ext_valid(VALID_FILE_EXT, img_f.path().extension().string()))
+        if (!findInVec(kValidFileExt, img_f.path().extension().string()))
         {
             std::cerr << img_f_path_str << ": extension is not valid for a image file" << '\n';
             continue;
@@ -93,7 +93,7 @@ bool Val::read_img_files(Images &images, const std::string &lib_path)
     }
 
     // Sort the images
-    std::sort(images.begin(), images.end(), compare_by_fnum);
+    std::sort(images.begin(), images.end(), compareByFnum);
 
     for (const auto &img : images)
     {

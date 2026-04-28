@@ -9,7 +9,7 @@
 #include "val.hpp"
 #include "config/tuning_params.hpp"
 
-// TODO: Replace Bg_pt with cv::Point
+// TODO: Replace BgPt with cv::Point
 // TODO: Seperate validation into a different layer. Validation for these function types.
 
 /**
@@ -17,7 +17,7 @@
  * @param deviation How much should the treshold value deviate from the mean
  * @return Returns two estimated threshold value that is ${devation} stddev from mean
  */
-uchar Bg_sub::threshold_calc(const cv::Mat img, double deviation)
+uchar BgSub::thresholdCalc(const cv::Mat img, double deviation)
 {
     // By nature of comp of del B, foreground will be lighter pixels
     cv::Scalar mean, stddev;
@@ -30,7 +30,7 @@ uchar Bg_sub::threshold_calc(const cv::Mat img, double deviation)
 /**
  * @param mask_size // Masks the first x values of the histogram {most freq background pixels} before normalization
  */
-cv::Mat Bg_sub::create_histogram(const cv::Mat &img, uchar thresh_indicator, int mask_size, bool should_print)
+cv::Mat BgSub::createHistogram(const cv::Mat &img, uchar thresh_indicator, int mask_size, bool should_print)
 {
     if (mask_size < 0 || mask_size > 256)
     {
@@ -93,9 +93,9 @@ cv::Mat Bg_sub::create_histogram(const cv::Mat &img, uchar thresh_indicator, int
     return hist_img;
 }
 
-bool is_k_size_valid(int k_size)
+bool isKSizeValid(int k_size)
 {
-    for (const auto valid_k_size : Config::Tuning::VALID_K_SIZES)
+    for (const auto valid_k_size : Config::Tuning::kValidKSizes)
     {
         if (k_size == valid_k_size)
             return true;
@@ -106,7 +106,7 @@ bool is_k_size_valid(int k_size)
 /**
  * @param should_threshold Implemented and used only for testing purposed and not for anything else.
  */
-Bg_sub::del_B_mats_t Bg_sub::comp_and_threshold(const cv::Mat &img_1, const cv::Mat &img_2, bool should_threshold, uchar threshold)
+BgSub::DelBMats BgSub::compAndThreshold(const cv::Mat &img_1, const cv::Mat &img_2, bool should_threshold, uchar threshold)
 {
 
     // Initializing with the first image //FIXME There has to be a better way to do this.
@@ -147,11 +147,11 @@ Bg_sub::del_B_mats_t Bg_sub::comp_and_threshold(const cv::Mat &img_1, const cv::
         }
     }
 
-    return del_B_mats_t{out_img_bright, out_img_shadow, out_img_unthresh, out_img_unthresh_bright};
+    return DelBMats{out_img_bright, out_img_shadow, out_img_unthresh, out_img_unthresh_bright};
 }
 
 // x and y are already relative indexes to the padded image, starting without the padding itself.
-bool morph_min_max(const Bg_sub::pt_t &pt, const cv::Mat &k, const cv::Mat &padded_img, const uchar comp_val)
+bool morphMinMax(const BgSub::Pt &pt, const cv::Mat &k, const cv::Mat &padded_img, const uchar comp_val)
 {
     int k_size{k.rows};
     int offset{-k_size / 2}; // Both padding size and offset must be the same.
@@ -169,19 +169,19 @@ bool morph_min_max(const Bg_sub::pt_t &pt, const cv::Mat &k, const cv::Mat &padd
     return false;
 }
 
-cv::Mat morph_process(const cv::Mat &img, Bg_sub::BIN_P proc_type, const int k_size)
+cv::Mat morphProcess(const cv::Mat &img, BgSub::BinP proc_type, const int k_size)
 {
     // Image type validation should already be done.
-    assert(is_k_size_valid(k_size) && "The kernal size should of size 3, 5 or 7.");
+    assert(isKSizeValid(k_size) && "The kernal size should of size 3, 5 or 7.");
 
     // Create the return mat
     cv::Mat out_img = cv::Mat::zeros(img.size(), img.type());
 
     // Make the comp_val calc more readable
     uchar comp_val;
-    if (proc_type == Bg_sub::BIN_P::DIALATION)
+    if (proc_type == BgSub::BinP::kDialation)
         comp_val = 255;
-    else if (proc_type == Bg_sub::BIN_P::EROSION)
+    else if (proc_type == BgSub::BinP::kErosion)
         comp_val = 0;
     else
         throw std::invalid_argument("Unknown Morph process type"); // Shoul never exe
@@ -197,36 +197,36 @@ cv::Mat morph_process(const cv::Mat &img, Bg_sub::BIN_P proc_type, const int k_s
     {
         for (int j = p_size; j < padded_img.cols - p_size; j++)
         {
-            if (proc_type == Bg_sub::BIN_P::DIALATION)
+            if (proc_type == BgSub::BinP::kDialation)
                 // If any neighbor is 255 -> pixel to 255 (Expands white regions)
-                out_img.at<uchar>(i - p_size, j - p_size) = morph_min_max(Bg_sub::pt_t{i, j}, k, padded_img, comp_val) ? 255 : 0;
+                out_img.at<uchar>(i - p_size, j - p_size) = morphMinMax(BgSub::Pt{i, j}, k, padded_img, comp_val) ? 255 : 0;
             else
                 // If any neighbor is 0 -> pixle is 0 (Shrinks white regions)
-                out_img.at<uchar>(i - p_size, j - p_size) = morph_min_max(Bg_sub::pt_t{i, j}, k, padded_img, comp_val) ? 0 : 255;
+                out_img.at<uchar>(i - p_size, j - p_size) = morphMinMax(BgSub::Pt{i, j}, k, padded_img, comp_val) ? 0 : 255;
         }
     }
     return out_img;
 }
 
-cv::Mat morph_opening(const cv::Mat &img, double erosion_k_size, double dialation_k_size)
+cv::Mat morphOpening(const cv::Mat &img, double erosion_k_size, double dialation_k_size)
 {
-    cv::Mat erosed_img = morph_process(img, Bg_sub::BIN_P::EROSION, erosion_k_size);
-    cv::Mat dialated_img = morph_process(erosed_img, Bg_sub::BIN_P::DIALATION, dialation_k_size);
+    cv::Mat erosed_img = morphProcess(img, BgSub::BinP::kErosion, erosion_k_size);
+    cv::Mat dialated_img = morphProcess(erosed_img, BgSub::BinP::kDialation, dialation_k_size);
 
     return dialated_img;
 }
 
-cv::Mat morph_closing(const cv::Mat &img, double erosion_k_size, double dialation_k_size)
+cv::Mat morphClosing(const cv::Mat &img, double erosion_k_size, double dialation_k_size)
 {
-    cv::Mat dialated_img = morph_process(img, Bg_sub::BIN_P::DIALATION, dialation_k_size);
-    cv::Mat erosed_img = morph_process(dialated_img, Bg_sub::BIN_P::EROSION, erosion_k_size);
+    cv::Mat dialated_img = morphProcess(img, BgSub::BinP::kDialation, dialation_k_size);
+    cv::Mat erosed_img = morphProcess(dialated_img, BgSub::BinP::kErosion, erosion_k_size);
 
     return erosed_img;
 }
 
-cv::Mat Bg_sub::sub_algo(const cv::Mat &img_1, const cv::Mat &img_2)
+cv::Mat BgSub::subAlgo(const cv::Mat &img_1, const cv::Mat &img_2)
 {
-    Val::validate_images(img_1, img_2);
+    Val::validateImages(img_1, img_2);
 
     // 1. Calculate del B --> Map of del in pixel brighness due to motion
     // 2. Threshold --> filtering of large and small del B into binary values --> makes 1 more obvious
@@ -235,15 +235,15 @@ cv::Mat Bg_sub::sub_algo(const cv::Mat &img_1, const cv::Mat &img_2)
     // Closing(covers up small holes in the foreground) --> Dialation >> Erosion
 
     // Opening with same kernal size to remove small foreground artifacts
-    Bg_sub::del_B_mats_t del_B_mats = comp_and_threshold(img_1, img_2, false);
-    uchar threshold = threshold_calc(del_B_mats.unthresh_bright, Config::Tuning::THRESH_DEV);
+    BgSub::DelBMats del_b_mats = compAndThreshold(img_1, img_2, false);
+    uchar threshold = thresholdCalc(del_b_mats.unthresh_bright, Config::Tuning::kThreshDev);
 
     // Thersholding in another layer as threshold value needs to be dyn calc
     cv::Mat thresholded_bright;
-    cv::threshold(del_B_mats.unthresh_bright, thresholded_bright, threshold, 255, cv::THRESH_BINARY);
+    cv::threshold(del_b_mats.unthresh_bright, thresholded_bright, threshold, 255, cv::THRESH_BINARY);
 
     // Showing hist also
-    cv::imshow("Created histogram", create_histogram(del_B_mats.unthresh_bright, threshold, Config::Tuning::HIST_MASK, true));
+    cv::imshow("Created histogram", createHistogram(del_b_mats.unthresh_bright, threshold, Config::Tuning::kHistMask, true));
 
-    return morph_opening(thresholded_bright, Config::Tuning::K_SIZE, Config::Tuning::K_SIZE);
+    return morphOpening(thresholded_bright, Config::Tuning::kKSize, Config::Tuning::kKSize);
 }

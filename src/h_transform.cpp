@@ -8,7 +8,7 @@
 #include "types/ball_state.hpp"
 #include "types/image_state.hpp"
 
-void Trans::print_circle_cand(const Circles &circle_cand)
+void Trans::printCircleCand(const Circles &circle_cand)
 {
     if (circle_cand.empty())
     {
@@ -39,19 +39,19 @@ cv::Scalar getColor(std::string color)
         return cv::Scalar{0, 0, 0}; // Black
 }
 
-void Trans::draw_circles(const Circles &circle_cand, cv::Mat &img, double text_font_scale)
+void Trans::drawCircles(const Circles &circle_cand, cv::Mat &img, double text_font_scale)
 {
     for (const auto &circle : circle_cand)
     {
         cv::Point centre(cvRound(circle[0]), cvRound(circle[1]));
         int r{cvRound(circle[2])};
 
-        cv::Point textPt(centre.x + r + 10, centre.y + r + 10);
-        cv::String textStr = "(" + std::to_string(centre.x) + ", " + std::to_string(centre.y) + ")" + " ,R=" + std::to_string(r);
+        cv::Point text_pt(centre.x + r + 10, centre.y + r + 10);
+        cv::String text_str = "(" + std::to_string(centre.x) + ", " + std::to_string(centre.y) + ")" + " ,R=" + std::to_string(r);
 
         cv::circle(img, centre, r, getColor("grey"), 1);
         cv::circle(img, centre, 3, getColor("grey"), -1); // -1 means filled
-        cv::putText(img, textStr, textPt, cv::FONT_HERSHEY_COMPLEX, text_font_scale, getColor("red"));
+        cv::putText(img, text_str, text_pt, cv::FONT_HERSHEY_COMPLEX, text_font_scale, getColor("red"));
     }
 }
 
@@ -70,8 +70,8 @@ void Trans::draw_circles(const Circles &circle_cand, cv::Mat &img, double text_f
 //         25
 //     );
 
-//     Trans::print_circle_cand(circle_cand);
-//     Trans::draw_circles(circle_cand, img, 0.35);
+//     Trans::printCircleCand(circle_cand);
+//     Trans::drawCircles(circle_cand, img, 0.35);
 //     return true;
 // }
 
@@ -79,7 +79,7 @@ void Trans::draw_circles(const Circles &circle_cand, cv::Mat &img, double text_f
  * @param img Takes in thresholded image
  * @return An Vec3f that holds x_coord, y_coord and radius (all floats) in order
  */
-void find_circle_cand(const cv::Mat &img, Circles &out_circles, ball_det_count_t &count)
+void findCircleCand(const cv::Mat &img, Circles &out_circles, BallDetCount &count)
 {
 
     Contours raw_contours;
@@ -94,7 +94,7 @@ void find_circle_cand(const cv::Mat &img, Circles &out_circles, ball_det_count_t
 
         double circularity = (4 * M_PI * area) / (perimeter * perimeter);
 
-        if (circularity < Config::Tuning::MIN_CIRCULARITY)
+        if (circularity < Config::Tuning::kMinCircularity)
         {
             std::cout << "A contour of low circulatrity: " << circularity << " has been eliminated." << '\n';
             count.cir++;
@@ -102,7 +102,7 @@ void find_circle_cand(const cv::Mat &img, Circles &out_circles, ball_det_count_t
             continue;
         }
 
-        if (area < Config::Tuning::MIN_BALL_AREA || area > Config::Tuning::MAX_BALL_AREA)
+        if (area < Config::Tuning::kMinBallArea || area > Config::Tuning::kMaxBallArea)
         {
             std::cout << "A ball artifact of to small or large area: " << area << " has been eliminated. " << '\n';
             count.area++;
@@ -127,13 +127,13 @@ void find_circle_cand(const cv::Mat &img, Circles &out_circles, ball_det_count_t
     }
 }
 
-void Trans::find_ball_cand(cv::Mat &img, Circles &all_circles, ball_det_count_t &count)
+void Trans::findBallCand(cv::Mat &img, Circles &all_circles, BallDetCount &count)
 {
     Circles curr_circles;
-    find_circle_cand(img, curr_circles, count);
+    findCircleCand(img, curr_circles, count);
 
-    Trans::print_circle_cand(curr_circles);
-    Trans::draw_circles(curr_circles, img);
+    Trans::printCircleCand(curr_circles);
+    Trans::drawCircles(curr_circles, img);
 
     // Inserts current circles found in the image to all the circles
     all_circles.insert(all_circles.end(), curr_circles.begin(), curr_circles.end());

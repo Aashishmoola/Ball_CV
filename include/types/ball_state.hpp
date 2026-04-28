@@ -5,7 +5,7 @@
 #include <opencv2/core.hpp>
 
 // position and velocity of the ball in pixels, velocity is calc in the kalman filter itself
-struct ball_state_t
+struct BallState
 {
     double x;
     double y;
@@ -13,13 +13,13 @@ struct ball_state_t
     double y_v;
 };
 
-struct ball_disp_t
+struct BallDisp
 {
     double x;
     double y;
 };
 
-using Ball_states = std::vector<ball_state_t>;
+using BallStates = std::vector<BallState>;
 
 using Contour = std::vector<cv::Point>;
 using Contours = std::vector<Contour>;

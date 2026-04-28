@@ -30,7 +30,11 @@ MVP 1: Done
 Cleanup 1: 
 DONE: Readup on how imports should be managed with this modular code structure.
 TODO Some types, stdlib seem to be leaking from the header file to th associated cpp file 
-TODO Readup on error handling, iterate of the best_practices.md content. (30 mins)
+TODO Most suitable approach to error handling
+    1. Wrap the main running function in a try catch block that catches the errors and log it in final catch all layers
+    2. Each moudule must have its own robust yet flexible error handling, if they raise an error to main, then it means that the error is programme breaking.
+    Change all logging errors to thrown errors if required or just log in non-breaking
+    Use assert to check alignment of data within modules. Should raise errors within modules as they can be serious.
 TODO Consider per module imports in CMakeLists.txt. (10 mins)
 TODO Understang how testing is done in c++. (30 mins)
 

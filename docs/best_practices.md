@@ -1,4 +1,3 @@
-# Design Thinking, shifting how you perceive, approach and breakdown the problem.
 
 ## Mental Models and Principles
 - First Principles Thinking: Breaking complex problems down to their most basic, fundamental truths to rebuild innovative solutions. Asking why iteratively.
@@ -22,30 +21,50 @@
 - Set artificial deadlines
 
 ## Best practices
-1. The hpp file must only contain declerations. The cpp file should contain implementation specific global consts. 
-    - Use constexpr if possible. 
-    - Seperate dev and prod constants with comments.
-2. Use scoped enums for switches instead of bool vals (no semantic meaning);
-3. Use consistenly formatted namespaces for each module
-4. Global helpers module should contain functions that are really global --> Does opencv or other third party libs not have this helper function that you have to implement yourself?
-5. In terms of naming conventions --> The larger the scope, the more distinct and readable the names for objects, rvalues has to be.
-6. Import std libs or third party libs in the .cpp file (the implementation file) or the header file only when used in the file itself.
-7. Do not outsource parsing of code (understanding syntax), understanding (mental compilation) and writing code (making design decisions) to claude. You are outsourcing the skill people are going to hire you for.
-8. Always do validation with false break/return cases instead of nested true cases. --> General Coding Antipattern
-9. The correct way to handle errors:
-    1. Scen 1: When the function is not able to execute its intended function at all due to caller error; inter-module, in main where they interface with each other --> throw error
-    2. Scen 2: When the function is not able to execute it intended function at all due to caller error; intra-module, within helper functions in the same module itseld --> Use assert
-    3. Scen 3: When programme/function is not able to run as intended, partially fail, but programme can still continue --> boolean values to possibly stop control flow in layer & logging
-    4. Scen 4: When programme fails due to expected non-user reason, default catch all --> Error codes.
-    5. Scen 5: When function only fails strict/semantic checks --> Logging to warn user.
-10. Use inline constepxr header file enclosed within a namespace for truly global constants that affect multiple modules and/or can be tuned.
+### Structuing header and cpp files 
+- Follow normal subdir config as standardised online (Ex: src, build, include)
+- The hpp file associated with each cpp file (module) must only contain forward declerations of functions being used. 
+- Seperate out all constants into different header files:
+    - Config 
+        1. Changing how each module runs -> Tuning
+        2. Changing hardware derived constants -> Hardware config
+    - Constants
+        1. Global physics constants
+    - Types 
+        1. Shared types alises that are used inter-modules
 
-## Naming Conventions
+
+### The correct way to handle errors
+- Scen 1: When the function is not able to execute its intended function at all due to caller error (incorrect programme configuration); inter-module, in main where they interface with each other 
+    - throw error
+- Scen 2: When the function is not able to execute it intended function at all due to caller error(Sle); intra-module, within helper functions in the same module itself 
+    - Use assert
+- Scen 3: When programme/function is not able to run as intended, partially fail, but programme can still continue 
+    - boolean values to possibly stop control flow in layer & logging
+    - Skip Iteration & logging
+- Scen 4: When programme fails due to expected non-user reason, default catch all 
+    - Error codes.
+    - In smaller programmes, generic errors with specific logging messages
+- Scen 5: When function only fails strict/semantic checks 
+    - Logging to warn user.
+
+### Naming Conventions
 - Abbreviations should be obvious, if not capitalise. RPG (Role Playing Game)
 - file_names, variable_names, Class/Struct member names --> Typed in snake_case (No - capitalisation)
 - function_names --> PascalCase(No Capitalisation)
 - Classes, Namespaces --> PascalCase(Capitalisation)
 - Constants (Global, namespaced scoped, enum, class static) --> PascalCase (Prefixed with lowercase 'k')
+
+### Others
+1. Use scoped enums for switches instead of bool vals (no semantic meaning);
+2. Use consistenly formatted namespaces for each module
+4. Global helpers module should contain functions that are really global --> Does opencv or other third party libs not have this helper function that you have to implement yourself?
+5. In terms of naming conventions --> The larger the scope, the more distinct and readable the names for objects, rvalues has to be.
+6. Import std libs or third party libs in the .cpp file (the implementation file) or the header file only when used in the file itself.
+7. Do not outsource parsing of code (understanding syntax), understanding (mental compilation) and writing code (making design decisions) to claude. You are outsourcing the skill people are going to hire you for.
+8. Always do validation with false break/return cases instead of nested true cases. --> General Coding Antipattern
+
+
 
 ## Common errors
 1. All relative paths used are relative to the root of the build dir as there is where the bin file is built.

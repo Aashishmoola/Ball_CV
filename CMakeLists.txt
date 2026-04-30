@@ -37,8 +37,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Tell CMake where to find OpenCV's CMake config files.
 # Since OpenCV is built from source at ~/Libraries/opencv, we point to its
 # build directory. If you've built OpenCV in a different location, update this.
-set(OpenCV_DIR "/home/aashishrapsodo/Libraries/opencv/build")
-
+set(OpenCV_DIR "/home/aashishrapsodo/libs/opencv/build")
 # Locate the OpenCV package. REQUIRED means the build will fail with a clear
 # error if OpenCV is not found, rather than silently continuing.
 # This defines variables like OpenCV_INCLUDE_DIRS and OpenCV_LIBS, and also
@@ -48,6 +47,10 @@ find_package(OpenCV REQUIRED)
 # Print the detected OpenCV version during configuration for verification.
 message(STATUS "Found OpenCV version: ${OpenCV_VERSION}")
 message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
+
+find_package(spdlog CONFIG REQUIRED)
+message(STATUS "Found spdlog version: ${spdlog_VERSION}")
+
 
 # ============================================================================
 # Collect source files
@@ -94,6 +97,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 # consumers of this target (relevant if this were a library).
 target_link_libraries(${PROJECT_NAME} PRIVATE
     ${OpenCV_LIBS}
+    spdlog::spdlog
 )
 
 # ============================================================================

@@ -29,20 +29,20 @@
 MVP 1: Done 
 Cleanup 1: 
 DONE: Readup on how imports should be managed with this modular code structure.
+TODO Unscope constants if not needed.
 TODO Some types, stdlib seem to be leaking from the header file to th associated cpp file 
-TODO Most suitable approach to error handling
-    1. Wrap the main running function in a try catch block that catches the errors and log it in final catch all layers
-    2. Each moudule must have its own robust yet flexible error handling, if they raise an error to main, then it means that the error is programme breaking.
-    Change all logging errors to thrown errors if required or just log in non-breaking
-    Use assert to check alignment of data within modules. Should raise errors within modules as they can be serious.
-TODO Consider per module imports in CMakeLists.txt. (10 mins)
-TODO Understang how testing is done in c++. (30 mins)
-
+TODO Wrap the main running function in a try catch block that catches the errors and log it in final catch all layers
+TODO for every single module: 
+1. Make sure that detailed logging is carried out. Make dubugging easier.
+2. Make sure that unit test is being recorded for every single module, check for basic functionality.
+3. Ensure that some errors are being caught with claude and fixed manually.
+4. Ensure that module naming is consistent
+5. Ensure that the conversion for types makes sense
 
 Some production level improvemnts to the code:
-1. Make programme so it can be portable (run in a external environment)
-2. Error handling and input and output boundaries
-3. Use a standardised method of logging
+1. Make programme so it can be portable (run in a external environment) -> Later when itegrating with hardware
+2. Error handling and input and output boundaries -> Imp , check if all bases are covered
+3. Use a standardised method of logging -> Imp, logging is useful for real time debugging, 
 4. Start creating tests for each single moudule an then a full end-to-end regression test
 5. Implement necessary compile options and sanitizer build
 6. FIX FIXME's and dead branch in kf_2D
@@ -71,6 +71,11 @@ Some production level improvemnts to the code:
     Ok: Using threshold that is (two) std dev away from mean
 
 cv::Scalar --> maps to double[4], usually required to hold values for RGBA pixel values
+3. CV Image Type: CV_ + No. of Bits per channel + U/S/F + C + No. of channels 
+    - U -> Unsigned
+    - S -> Signed
+    - F -> Floating
+    - 3 channels -> BGR, 1 channel -> Greyscale
 
 
 

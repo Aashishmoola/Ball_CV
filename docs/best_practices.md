@@ -1,4 +1,6 @@
 
+![How to use AI effectively](image.png)
+
 ## Mental Models and Principles
 - First Principles Thinking: Breaking complex problems down to their most basic, fundamental truths to rebuild innovative solutions. Asking why iteratively.
 - Inversion: Thinking about a problem in reverse. Instead of asking how to succeed, ask, "How could this system fail?" or "What could go wrong?" to identify risks early.
@@ -35,18 +37,22 @@
 
 
 ### The correct way to handle errors
-- Scen 1: When the function is not able to execute its intended function at all due to caller error (incorrect programme configuration); inter-module, in main where they interface with each other 
-    - throw error
-- Scen 2: When the function is not able to execute it intended function at all due to caller error(Sle); intra-module, within helper functions in the same module itself 
-    - Use assert
-- Scen 3: When programme/function is not able to run as intended, partially fail, but programme can still continue 
-    - boolean values to possibly stop control flow in layer & logging
-    - Skip Iteration & logging
-- Scen 4: When programme fails due to expected non-user reason, default catch all 
-    - Error codes.
-    - In smaller programmes, generic errors with specific logging messages
-- Scen 5: When function only fails strict/semantic checks 
-    - Logging to warn user.
+  - Scen 1 (main/Validation Layer): 
+    1. User input invalid → log + exit non-zero, no exception.
+    2. User input valid but unlikely -> log warning + proceed
+  - Scen 2 (module functions): 
+    1. Inter-module API misuse → throw typed exception.
+    2. Programmer error caught at runtime → throw typed exception.
+    3. Intra-module precondition violation -> assert
+    4. Soft failure (Intra/Inter module) -> log + optional continue + optional bool
+    5. Soft failure during iteration (Intra Module) -> log warning, proceed
+ 
+
+#### Spdlog Different Error Levels:
+- info (spdlog::level::info): General operational messages, highlighting progress (e.g., "Server started").
+- warn (spdlog::level::warn): Indicates potentially harmful situations or unexpected events that are not immediate errors.
+- error (spdlog::level::error): Used for errors that might allow the application to continue running, such as failed file reads or handled exceptions.
+- critical (spdlog::level::critical): Severe errors causing premature application termination or major functionality failure.
 
 ### Naming Conventions
 - Abbreviations should be obvious, if not capitalise. RPG (Role Playing Game)

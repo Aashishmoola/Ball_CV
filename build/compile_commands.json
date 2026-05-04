@@ -58,5 +58,11 @@
   "command": "/usr/bin/c++ -DFMT_SHARED -DSPDLOG_COMPILED_LIB -DSPDLOG_FMT_EXTERNAL -DSPDLOG_SHARED_LIB -I/home/aashishrapsodo/rapsodo/repos/ball_cv/include -isystem /home/aashishrapsodo/libs/opencv/build -isystem /home/aashishrapsodo/libs/opencv/include -isystem /home/aashishrapsodo/libs/opencv/modules/core/include -isystem /home/aashishrapsodo/libs/opencv/modules/flann/include -isystem /home/aashishrapsodo/libs/opencv/modules/imgproc/include -isystem /home/aashishrapsodo/libs/opencv/modules/ml/include -isystem /home/aashishrapsodo/libs/opencv/modules/photo/include -isystem /home/aashishrapsodo/libs/opencv/modules/dnn/include -isystem /home/aashishrapsodo/libs/opencv/modules/features2d/include -isystem /home/aashishrapsodo/libs/opencv/modules/imgcodecs/include -isystem /home/aashishrapsodo/libs/opencv/modules/videoio/include -isystem /home/aashishrapsodo/libs/opencv/modules/calib3d/include -isystem /home/aashishrapsodo/libs/opencv/modules/highgui/include -isystem /home/aashishrapsodo/libs/opencv/modules/objdetect/include -isystem /home/aashishrapsodo/libs/opencv/modules/stitching/include -isystem /home/aashishrapsodo/libs/opencv/modules/ts/include -isystem /home/aashishrapsodo/libs/opencv/modules/video/include -isystem /home/aashishrapsodo/libs/opencv/modules/gapi/include -g -std=c++17 -o CMakeFiles/ball_cv.dir/src/kf_2d.cpp.o -c /home/aashishrapsodo/rapsodo/repos/ball_cv/src/kf_2d.cpp",
   "file": "/home/aashishrapsodo/rapsodo/repos/ball_cv/src/kf_2d.cpp",
   "output": "CMakeFiles/ball_cv.dir/src/kf_2d.cpp.o"
+},
+{
+  "directory": "/home/aashishrapsodo/rapsodo/repos/ball_cv/build",
+  "command": "/usr/bin/c++  -isystem /home/aashishrapsodo/rapsodo/repos/ball_cv/build/_deps/googletest-src/googletest/include -isystem /home/aashishrapsodo/rapsodo/repos/ball_cv/build/_deps/googletest-src/googletest -g -std=c++17 -o CMakeFiles/hello_test.dir/hello_test.cc.o -c /home/aashishrapsodo/rapsodo/repos/ball_cv/hello_test.cc",
+  "file": "/home/aashishrapsodo/rapsodo/repos/ball_cv/hello_test.cc",
+  "output": "CMakeFiles/hello_test.dir/hello_test.cc.o"
 }
 ]

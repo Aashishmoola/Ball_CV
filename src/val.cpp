@@ -105,6 +105,4 @@ void Val::readImgFiles(Images &images, const std::string &lib_path,
   }
   std::cout << images.size() << ": Images have been read from " << lib_path
             << '\n';
-
-  return true;
 }

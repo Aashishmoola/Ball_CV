@@ -19,6 +19,16 @@ set(CMAKE_CXX_STANDARD 17)
 # rather than silently falling back to an older standard.
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+
+enable_testing()
+
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/52eb8108c5bdec04579160ae17225d66034bd723.zip
+)
+
+FetchContent_MakeAvailable(googletest)
 # Disable compiler-specific extensions (e.g., GNU extensions) to ensure
 # portable, standards-compliant code.
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -70,13 +80,16 @@ set(SOURCES
     src/kf_2d.cpp
 )
 
+
+
 # ============================================================================
 # Define the executable target
 # ============================================================================
 # Create the executable from the collected source files.
 # "ball_cv" will be the name of the output binary.
-add_executable(${PROJECT_NAME} ${SOURCES})
 
+add_executable(${PROJECT_NAME} ${SOURCES} )
+add_executable(hello_test hello_test.cc)
 # ============================================================================
 # Include directories
 # ============================================================================
@@ -99,6 +112,14 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     ${OpenCV_LIBS}
     spdlog::spdlog
 )
+
+target_link_libraries(    
+    hello_test
+    GTest::gtest_main
+)
+
+include(GoogleTest)
+gtest_discover_tests(hello_test)
 
 # ============================================================================
 # Build type default
